@@ -3,11 +3,22 @@ import express from 'express';
 import bodyParser from 'body-parser';
 import logging from './config/logging';
 import config from './config/config';
+import mongoose from 'mongoose';
 import trainingRoutes from './routes/training';
 import training from './controllers/training';
 
 const NAMESPACE = 'Server';
 const router = express();
+
+/** Connect to Mongo */
+mongoose
+    .connect(config.mongo.url, config.mongo.options)
+    .then((result) => {
+        logging.info(NAMESPACE, 'Connected to mongoDB!');
+    })
+    .catch((error) => {
+        logging.error(NAMESPACE, error.message, error);
+    });
 
 /** Logging the request */
 router.use((req, res, next) => {
