@@ -49,7 +49,7 @@ router.use((req, res, next) => {
 });
 
 /** Routes */
-router.use('/training', trainingRoutes);
+router.use('/api', trainingRoutes);
 
 /** Create the server */
 const httpServer = http.createServer(router);
