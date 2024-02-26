@@ -15,3 +15,5 @@ npm run build
 npm install mongoose
 
 npm install --save-dev @types/mongoose
+
+nodemon source/server.ts
