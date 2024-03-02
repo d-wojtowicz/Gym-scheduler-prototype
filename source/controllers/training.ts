@@ -31,7 +31,18 @@ const createTraining = (req: Request, res: Response, next: NextFunction) => {
 
 // GET
 const getAllTrainings = (req: Request, res: Response, next: NextFunction) => {
-    Training.find()
+    let query = {};
+
+    if (req.query._id) {
+        const id = req.query._id as string;
+        query = { _id: { $eq: id } }
+    }
+    if (req.query.workoutType) {
+        const workoutType = req.query.workoutType as string;
+        query = {...query, workoutType: { $eq: workoutType } }
+    }
+
+    Training.find(query)
     .exec()
     .then((results) => {
         return res.status(200).json({
