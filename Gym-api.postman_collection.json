@@ -16,6 +16,15 @@
 			"response": []
 		},
 		{
+			"name": "api/get/trainings/date/:date",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "http://localhost:3000/api/get/trainings/date/"
+			},
+			"response": []
+		},
+		{
 			"name": "api/create/training",
 			"request": {
 				"method": "POST",
