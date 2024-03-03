@@ -9,24 +9,24 @@ const createTraining = (req: Request, res: Response, next: NextFunction) => {
     const training = new Training({
         _id: new mongoose.Types.ObjectId(),
         date,
-        workoutType, 
+        workoutType,
         workoutPlan,
         extraInformation
     });
 
     return training
-    .save()
-    .then((result) => {
-        return res.status(201).json({
-            training: result
+        .save()
+        .then((result) => {
+            return res.status(201).json({
+                training: result
+            });
+        })
+        .catch((error) => {
+            return res.status(500).json({
+                message: error.message,
+                error
+            });
         });
-    })
-    .catch((error) => {
-        return res.status(500).json({
-            message: error.message,
-            error
-        });
-    });
 };
 
 // GET
@@ -35,63 +35,63 @@ const getAllTrainings = (req: Request, res: Response, next: NextFunction) => {
 
     if (req.query._id) {
         const id = req.query._id as string;
-        query = { _id: { $eq: id } }
+        query = { _id: { $eq: id } };
     }
     if (req.query.workoutType) {
         const workoutType = req.query.workoutType as string;
-        query = {...query, workoutType: { $eq: workoutType } }
+        query = { ...query, workoutType: { $eq: workoutType } };
     }
 
     Training.find(query)
-    .exec()
-    .then((results) => {
-        return res.status(200).json({
-            trainings: results,
-            count: results.length
+        .exec()
+        .then((results) => {
+            return res.status(200).json({
+                trainings: results,
+                count: results.length
+            });
+        })
+        .catch((error) => {
+            return res.status(500).json({
+                message: error.message,
+                error
+            });
         });
-    })
-    .catch((error) => {
-        return res.status(500).json({
-            message: error.message,
-            error
-        });
-    });
 };
 const getTrainingByDate = (req: Request, res: Response, next: NextFunction) => {
     const trainingsDate = req.params.date;
 
     if (!trainingsDate) {
         return res.status(400).json({
-            message: "No date provided."
+            message: 'No date provided.'
         });
     }
 
     const startOfDay = new Date(trainingsDate).setUTCHours(0, 0, 0, 0);
     const endOfDay = new Date(trainingsDate).setUTCHours(23, 59, 59, 999);
-    console.log(startOfDay, endOfDay)
+
     Training.find({
         date: {
             $gte: startOfDay,
             $lte: endOfDay
         }
     })
-    .exec()
-    .then((results) => {
-        return res.status(200).json({
-            trainings: results,
-            count: results.length
-        });
-    })
-    .catch((error) => {
-        return res.status(500).json({
-            message: error.message,
-            error
+        .exec()
+        .then((results) => {
+            return res.status(200).json({
+                trainings: results,
+                count: results.length
+            });
         })
-    })
+        .catch((error) => {
+            return res.status(500).json({
+                message: error.message,
+                error
+            });
+        });
 };
 
-export default { 
-    createTraining, 
-    getAllTrainings, 
-    getTrainingByDate 
+export default {
+    createTraining,
+    getAllTrainings,
+    getTrainingByDate
 };

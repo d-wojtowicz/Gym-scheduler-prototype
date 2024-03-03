@@ -5,6 +5,7 @@ import logging from './config/logging';
 import config from './config/config';
 import mongoose from 'mongoose';
 import trainingRoutes from './routes/training';
+import userRoutes from './routes/user';
 import training from './controllers/training';
 
 const NAMESPACE = 'Server';
@@ -50,6 +51,7 @@ router.use((req, res, next) => {
 
 /** Routes */
 router.use('/api', trainingRoutes);
+router.use('/api', userRoutes);
 
 /** Create the server */
 const httpServer = http.createServer(router);
