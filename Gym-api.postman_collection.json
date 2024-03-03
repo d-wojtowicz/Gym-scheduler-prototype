@@ -7,40 +7,113 @@
 	},
 	"item": [
 		{
-			"name": "api/get/trainings",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": "http://localhost:3000/training/get/trainings"
-			},
-			"response": []
-		},
-		{
-			"name": "api/get/trainings/date/:date",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": "http://localhost:3000/api/get/trainings/date/"
-			},
-			"response": []
-		},
-		{
-			"name": "api/create/training",
-			"request": {
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n    \"date\": \"2024-02-25\",\r\n    \"workoutType\": \"Gym\",\r\n    \"workoutPlan\": \"Testowy trening\"\r\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
+			"name": "trainings",
+			"item": [
+				{
+					"name": "api/get/trainings",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "http://localhost:3000/api/get/trainings"
+					},
+					"response": []
 				},
-				"url": "http://localhost:3000/api/create/training"
-			},
-			"response": []
+				{
+					"name": "api/get/trainings/date/:date",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "http://localhost:3000/api/get/trainings/date/2024-02-25"
+					},
+					"response": []
+				},
+				{
+					"name": "api/create/training",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"date\": \"2024-02-25\",\r\n    \"workoutType\": \"Gym\",\r\n    \"workoutPlan\": \"Testowy trening\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:3000/api/create/training"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "users",
+			"item": [
+				{
+					"name": "api/get/users",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "http://localhost:3000/api/get/users"
+					},
+					"response": []
+				},
+				{
+					"name": "api/get/user/:_id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "http://localhost:3000/api/get/user/65e4d5e29bef82fbc1bd8d17"
+					},
+					"response": []
+				},
+				{
+					"name": "api/create/user",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"USERNAME\",\r\n    \"password\": \"PASSWD\",\r\n    \"age\": 23,\r\n    \"height\": 187,\r\n    \"weight\": 88\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:3000/api/create/user"
+					},
+					"response": []
+				},
+				{
+					"name": "api/update/user/:_id",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"password\": \"test1\",\r\n    \"age\": 23,\r\n    \"weight\": 88,\r\n    \"height\": 187\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:3000/api/update/user/65e4d5e29bef82fbc1bd8d17"
+					},
+					"response": []
+				},
+				{
+					"name": "api/delete/user/:_id",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": "http://localhost:3000/api/delete/user/65e4d5e29bef82fbc1bd8d17"
+					},
+					"response": []
+				}
+			]
 		}
 	]
 }
