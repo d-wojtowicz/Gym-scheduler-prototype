@@ -87,6 +87,24 @@
 					"response": []
 				},
 				{
+					"name": "api/login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"admin2\",\r\n    \"password\": \"admin2\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:3000/api/login"
+					},
+					"response": []
+				},
+				{
 					"name": "api/update/user/:_id",
 					"request": {
 						"method": "PUT",

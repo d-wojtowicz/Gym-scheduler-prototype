@@ -1,6 +1,7 @@
 import { Request, Response, NextFunction } from 'express';
 import mongoose from 'mongoose';
 import User from '../models/user';
+import jwt from 'jsonwebtoken';
 
 //POST
 const createUser = (req: Request, res: Response, next: NextFunction) => {
@@ -28,6 +29,39 @@ const createUser = (req: Request, res: Response, next: NextFunction) => {
                 error
             });
         });
+};
+const loginUser = (req: Request, res: Response, next: NextFunction) => {
+    const { username, password } = req.body;
+    
+    User.findOne({ username })
+    .exec()
+    .then((user) => {
+        if (!user) {
+            return res.status(401).json({
+                message: "Invalid username or password."
+            });
+        }
+        user.comparePassword(password).then(isMatch => {
+            if (!isMatch) {
+                return res.status(401).json({
+                    message: "Invalid username or password."
+                });
+            }
+            const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET as string, { expiresIn: '1h' });
+            res.json({ token });
+        }).catch((error) => {
+            res.status(500).json({
+                message: error.message,
+                error
+            });
+        });
+    })
+    .catch((error) => {
+        res.status(500).json({
+            message: error.message,
+            error
+        });
+    });
 };
 
 //GET
@@ -120,6 +154,7 @@ const deleteUser = (req: Request, res: Response, next: NextFunction) => {
 
 export default {
     createUser,
+    loginUser,
     getAllUsers,
     getUserByID,
     updateUser,
