@@ -52,6 +52,7 @@ router.use((req, res, next) => {
 /** Routes */
 router.use('/api', trainingRoutes);
 router.use('/api', userRoutes);
+router.use(express.static('public'));
 
 /** Create the server */
 const httpServer = http.createServer(router);
