@@ -1,0 +1,18 @@
+.trainingTable{
+    border: 2px solid black;
+    border-collapse: collapse;
+}
+
+.trainingTable tr{
+    border: 1px solid black;
+}
+
+.trainingTable td{
+    text-align: center;
+    padding: 10px;
+}
+
+.trainingTable th{
+    padding-left: 10px;
+    padding-right: 10px;
+}
