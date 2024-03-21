@@ -1,3 +1,4 @@
+import * as path from 'path';
 import http from 'http';
 import express from 'express';
 import bodyParser from 'body-parser';
@@ -10,6 +11,11 @@ import training from './controllers/training';
 
 const NAMESPACE = 'Server';
 const router = express();
+
+/** Configure the EJS */
+router.set('view engine', 'ejs');
+router.set('views', path.join(__dirname, '../views'));
+router.use(express.static('public'));
 
 /** Connect to Mongo */
 mongoose
@@ -52,7 +58,6 @@ router.use((req, res, next) => {
 /** Routes */
 router.use('/api', trainingRoutes);
 router.use('/api', userRoutes);
-router.use(express.static('public'));
 
 /** Create the server */
 const httpServer = http.createServer(router);
