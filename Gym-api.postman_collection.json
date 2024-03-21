@@ -34,7 +34,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"date\": \"2024-02-25\",\r\n    \"workoutType\": \"Gym\",\r\n    \"workoutPlan\": \"Testowy trening\"\r\n}",
+							"raw": "{\r\n    \"userId\": \"65fc381bfab183f8137d65ab\",\r\n    \"date\": \"2024-03-24\",\r\n    \"workoutType\": \"Gym\",\r\n    \"workoutPlan\": [\r\n        {\r\n            \"type\": \"RDL\",\r\n            \"weight_load\": 80,\r\n            \"sets\": 5,\r\n            \"repetitions\": 5\r\n        },\r\n        {\r\n            \"type\": \"Wykroki\",\r\n            \"weight_load\": 30,\r\n            \"sets\": 3,\r\n            \"repetitions\": 12\r\n        },\r\n        {\r\n            \"type\": \"Wyciskanie leżąc\",\r\n            \"weight_load\": 80,\r\n            \"sets\": 5,\r\n            \"repetitions\": 5\r\n        },\r\n        {\r\n            \"type\": \"Wiosłowanie\",\r\n            \"weight_load\": 45,\r\n            \"sets\": 5,\r\n            \"repetitions\": 5\r\n        },\r\n        {\r\n            \"type\": \"Wznosy hantli bokiem\",\r\n            \"weight_load\": 10,\r\n            \"sets\": 3,\r\n            \"repetitions\": 12\r\n        }\r\n    ]\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
