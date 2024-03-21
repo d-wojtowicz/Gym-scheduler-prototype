@@ -4,10 +4,10 @@ import Training from '../models/training';
 
 // POST
 const createTraining = (req: Request, res: Response, next: NextFunction) => {
-    let { date, workoutType, workoutPlan, extraInformation } = req.body;
+    let { userId, date, workoutType, workoutPlan, extraInformation } = req.body;
 
     const training = new Training({
-        _id: new mongoose.Types.ObjectId(),
+        userId,
         date,
         workoutType,
         workoutPlan,

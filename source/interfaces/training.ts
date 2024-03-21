@@ -1,9 +1,17 @@
-import mongoose, { Document } from 'mongoose';
+import mongoose, { Document, Schema } from 'mongoose';
+
+interface IExercise {
+    type: string;
+    weight_load: number;
+    sets: number;
+    repetitions: number;
+    notes?: string;
+}
 
 export default interface ITraining extends Document {
-    userId: mongoose.Schema.Types.ObjectId;
+    userId: Schema.Types.ObjectId;
     date: Date;
     workoutType: string;
-    workoutPlan: string;
+    workoutPlan: IExercise[];
     extraInformation: string;
 }
