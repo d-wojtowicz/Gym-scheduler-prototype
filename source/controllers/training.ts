@@ -31,16 +31,24 @@ const createTraining = (req: Request, res: Response, next: NextFunction) => {
 
 // GET
 const getAllTrainings = (req: Request, res: Response, next: NextFunction) => {
+    const user = req.user ?? null
     let query = {};
 
-    if (req.query._id) {
-        const id = req.query._id as string;
-        query = { _id: { $eq: id } };
+    if (user) {
+        const id = user.userId as string;
+        query = { userId: { $eq: id } };
     }
+    else {
+        return res.status(500).json({
+            message: "The token was not found."
+        })
+    }
+    /* // Must learn how to pass req.query parameters safely so as to use them
     if (req.query.workoutType) {
         const workoutType = req.query.workoutType as string;
         query = { ...query, workoutType: { $eq: workoutType } };
-    }
+    } 
+    */
 
     Training.find(query)
         .exec()

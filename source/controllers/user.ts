@@ -32,13 +32,13 @@ const createUser = (req: Request, res: Response, next: NextFunction) => {
 };
 const loginUser = (req: Request, res: Response, next: NextFunction) => {
     const { username, password } = req.body;
-    
+
     User.findOne({ username })
     .exec()
     .then((user) => {
         if (!user) {
             return res.status(401).json({
-                message: "Invalid username or password."
+                message: "The user with the given name does not exist."
             });
         }
         user.comparePassword(password).then(isMatch => {
