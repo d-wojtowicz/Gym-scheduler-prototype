@@ -8,6 +8,8 @@ import mongoose from 'mongoose';
 import trainingRoutes from './routes/training';
 import userRoutes from './routes/user';
 import training from './controllers/training';
+import { verify } from 'jsonwebtoken';
+import verifyToken from '../public/js/verifyToken';
 
 const NAMESPACE = 'Server';
 const router = express();
@@ -15,7 +17,7 @@ const router = express();
 /** Configure the EJS */
 router.set('view engine', 'ejs');
 router.set('views', path.join(__dirname, '../views'));
-router.use(express.static('public'));
+router.use(express.static(path.join(__dirname, '../public')));
 
 /** Connect to Mongo */
 mongoose
@@ -55,9 +57,13 @@ router.use((req, res, next) => {
     next();
 });
 
-/** Routes */
+/** Routes of our API*/
 router.use('/api', trainingRoutes);
 router.use('/api', userRoutes);
+
+/** Routes of our site */
+router.get('/', (req, res) => res.render('pages/index'));
+router.get('/dashboard', (req, res) => res.render('pages/dashboard'));
 
 /** Create the server */
 const httpServer = http.createServer(router);
