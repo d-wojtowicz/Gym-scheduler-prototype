@@ -4,23 +4,26 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" type="text/css" href="css/style.css">
-        <title>Log in</title>
+        <title>Register</title>
     </head>
     <body>
-        <div id="loginPage">
+        <div id="registerPage">
             <div class="container">
                 <h1>Gym Calendar</h1>
-                <h2>Login to View Trainings</h2>
-                <form id="loginForm">
+                <h2>Create account</h2>
+                <form id="registerForm">
                     <label for="username">Username:</label><br>
                     <input type="text" id="username" name="username" required><br>
                     <label for="password">Password:</label><br>
                     <input type="password" id="password" name="password" required><br>
-                    <button type="submit">Login</button>
+                    <label for="password_rep">Repeat your password:</label><br>
+                    <input type="password" id="password_rep" name="password_rep" required><br>
+                    <h5><a href="login">I already have an account</a></h5>
+                    <button type="submit">Register</button>
+                    <div id="registerResponse"></div>
                 </form>
-                <div id="loginResponse"></div>
             </div>
         </div>
-        <script src="js/login.js"></script>
+        <script src="js/register.js"></script>
     </body>
 </html>

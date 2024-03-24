@@ -4,10 +4,10 @@ body{
     background-size: cover;
 }
 
-/* Login page */
-#loginPage .container{
+/* Login & Register page */
+#loginPage .container, #registerPage .container{
+    padding-top: 5vh;
     width: 40vw;
-    height: 55vh;
 
     text-align: center;
     color: rgb(151, 151, 151);
@@ -21,7 +21,14 @@ body{
     transform: translate(-50%, -50%);
 }
 
-#loginForm input{
+#loginPage a, #registerPage a{
+    color: rgb(151, 151, 151);
+}
+#loginPage a:hover, #registerPage a:hover{
+    color: rgb(100, 100, 100);
+}
+
+#loginForm input, #registerPage input{
     width: 15vw;
     height: 3vh;
 
@@ -31,11 +38,16 @@ body{
     border-radius: 3vw;
 }
 
-#loginForm > * {
+#loginForm, #registerForm {
+    margin-top: 5vh;
+    margin-bottom: 10vh;
+}
+
+#loginForm > *, #registerForm > *{
     margin: 10px;
 }
 
-#loginForm button{
+#loginForm button, #registerForm button{
     width: 10vw;
     height: 4vh;
 
@@ -44,9 +56,14 @@ body{
     border-radius: 1vw;
 }
 
-#loginForm button:hover{
+#loginForm button:hover, #registerForm button:hover{
     background-color: grey;
 }
+
+#loginResponse, #registerResponse {
+    color: rgb(161, 0, 0)
+}
+
 
 /* Single training page */
 .trainingTable{

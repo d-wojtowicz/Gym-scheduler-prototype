@@ -62,7 +62,9 @@ router.use('/api', trainingRoutes);
 router.use('/api', userRoutes);
 
 /** Routes of our site */
-router.get('/', (req, res) => res.render('pages/index'));
+router.get('/', (req, res) => res.render('pages/login'));
+router.get('/login', (req, res) => res.render('pages/login'));
+router.get('/register', (req, res) => res.render('pages/register'));
 router.get('/dashboard', (req, res) => res.render('pages/dashboard'));
 
 /** Create the server */

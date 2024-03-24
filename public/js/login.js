@@ -3,6 +3,15 @@ if (localStorage.getItem('token')) {
     localStorage.removeItem('token');
 }
 
+// If redirected from 'register' panel by created account
+if (localStorage.getItem('registerSuccess')) {
+    localStorage.removeItem('registerSuccess');
+    const success_msg = document.createElement("p");
+    success_msg.innerText = "The account has been created";
+    success_msg.setAttribute('style', 'color: green');
+    document.getElementById('loginResponse').replaceChildren(success_msg);
+}
+
 document.getElementById('loginForm').addEventListener('submit', function(e){
     e.preventDefault();
 

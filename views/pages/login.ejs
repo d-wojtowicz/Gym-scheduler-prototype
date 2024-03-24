@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="css/style.css">
+        <title>Log in</title>
+    </head>
+    <body>
+        <div id="loginPage">
+            <div class="container">
+                <h1>Gym Calendar</h1>
+                <h2>Login to View Trainings</h2>
+                <form id="loginForm">
+                    <label for="username">Username:</label><br>
+                    <input type="text" id="username" name="username" required><br>
+                    <label for="password">Password:</label><br>
+                    <input type="password" id="password" name="password" required><br>
+                    <h5><a href="register">Don't have an account yet?</a></h5>
+                    <button type="submit">Login</button>
+                    <div id="loginResponse"></div>
+                </form>
+            </div>
+        </div>
+        <script src="js/login.js"></script>
+    </body>
+</html>
