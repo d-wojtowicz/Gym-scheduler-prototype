@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../css/style.css">
+        <!-- Filled by server.ts -->
+        <title>
+            Training - <%= trainingDate %>
+        </title>
+    </head>
+    <body>
+        <div id="main-container">
+            <div id="main-controller">
+                <button id="left-button" class="button" onClick="location.href='/dashboard'">Back</button>
+                <h1 id="training-date">
+                    <!-- Filled by server.ts -->
+                    <%= trainingDate %>
+                </h1>
+                <button id="right-button" class="button" onClick="toggleModal(true)">+</button>
+            </div>
+            <div id="main-training">
+                <!-- Filled by training.js -->
+            </div>
+        </div>
+        <div id="create-training-modal">
+            <h1>Create training</h1>
+            <button class="button" onClick="toggleModal(false)">Close</button>
+        </div>
+        <script src="../js/training.js"></script>
+    </body>
+</html>

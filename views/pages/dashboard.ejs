@@ -3,12 +3,23 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="css/style.css">
+        <link rel="stylesheet" type="text/css" href="css/style.css">
         <title>Gym scheduler</title>
     </head>
     <body>
-        <h1>Gym Calendar</h1>
-        <!-- Create control flow for all trainings there -->
+        <div id="main-controller">
+            <h1>Gym calendar</h1>
+            <button id="left-button" class="button"><</button>
+            <h2 id='month'>
+                <!-- Filled by dashboard.js -->
+            </h2>
+            <button id="right-button" class="button">></button>
+        </div>
+        <div id="main-calendar">
+            <table id="main-calendar-month">
+                <!-- Filled by dashboard.js -->
+            </table>
+        </div>
         <script src="js/dashboard.js"></script>
     </body>
 </html>

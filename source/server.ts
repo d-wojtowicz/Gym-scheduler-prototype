@@ -1,3 +1,5 @@
+// TODO: Refactor page routes, controllers; include EJS.
+// TODO!!!: Take interest in a token (Should all information be sent in token? If yes - fix reading in .js files)
 import * as path from 'path';
 import http from 'http';
 import express from 'express';
@@ -66,6 +68,7 @@ router.get('/', (req, res) => res.render('pages/login'));
 router.get('/login', (req, res) => res.render('pages/login'));
 router.get('/register', (req, res) => res.render('pages/register'));
 router.get('/dashboard', (req, res) => res.render('pages/dashboard'));
+router.get('/dashboard/:date', (req, res) => res.render('pages/training', { trainingDate: req.params.date }));
 
 /** Create the server */
 const httpServer = http.createServer(router);
