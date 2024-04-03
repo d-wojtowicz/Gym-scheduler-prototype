@@ -37,3 +37,31 @@ function toggleModal(modalSwitch) {
         document.getElementById('create-training-modal').style.display = "none";
     }
 }
+
+function addExercise() {
+    const workoutPlanTable = document.getElementById('workoutPlan');
+    const workoutPlanTableHeaders = ['Name', 'WeightLoad', 'Sets', 'Repetitions'];
+    const numberOfRows = workoutPlanTable.getElementsByTagName('tr').length;
+    const MAX_EXERCISE_NUMBER = 8;
+
+    if (numberOfRows <= MAX_EXERCISE_NUMBER) {
+        const newRow = document.createElement('tr');
+
+        workoutPlanTableHeaders.forEach(header => {
+            const newCell = document.createElement('td');
+            const newInput = document.createElement('input');
+            
+            newInput.setAttribute('type', 'text');
+            newInput.setAttribute('required', true);
+            newInput.setAttribute('id', header + "_" + String(numberOfRows));
+            newInput.setAttribute('list', 'exercises-list');
+
+            newCell.appendChild(newInput);
+            newRow.appendChild(newCell);
+        });
+
+        workoutPlanTable.appendChild(newRow);
+    } else {
+
+    }
+}

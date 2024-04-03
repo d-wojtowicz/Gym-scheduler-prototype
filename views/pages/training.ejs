@@ -25,6 +25,24 @@
         </div>
         <div id="create-training-modal">
             <h1>Create training</h1>
+            <!-- workoutType workoutPlan (type, weight_load, sets, repetitions, extraInformation) -->
+            <form id="trainingForm">
+                <label for="workoutType">Workout type:</label><br>
+                <input type="text" id="workoutType" name="workoutType" required placeholder="Gym"><br>
+                <label for="workoutPlan">Workout plan:</label><br>
+                <button class="button" onClick="addExercise()" type="button">+</button>
+                <table id=workoutPlan>
+                    <tr>
+                        <th>Type</th>
+                        <th>Weight load</th>
+                        <th>Sets</th>
+                        <th>Repetitions</th>
+                    </tr>
+                    <!-- TODO: Generate appropriate number of fields -->
+                </table>
+                <label for="extraInformation">Extra information:</label><br>
+                <textarea id="extraInformation" name="extraInformation" required></textarea>
+            </form>
             <button class="button" onClick="toggleModal(false)">Close</button>
         </div>
         <script src="../js/training.js"></script>

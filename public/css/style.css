@@ -53,7 +53,7 @@ body{
     margin-bottom: 10vh;
 }
 
-#loginForm > *, #registerForm > *{
+#loginForm > *, #registerForm > *, #trainingForm > *{
     margin: 10px;
 }
 
@@ -191,9 +191,10 @@ body{
 }
 
 #create-training-modal {
+    overflow-y: scroll;
     display: none;
     width: 50vw;
-    height: 60vh;
+    height: 70vh;
     padding: 3vw 3vh 3vw 3vh;
 
     color: var(--fontColor);
@@ -204,6 +205,18 @@ body{
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+}
+
+#create-training-modal::-webkit-scrollbar{
+    background-color: var(--mainThemeHover);
+}
+
+#create-training-modal::-webkit-scrollbar-button{
+    background-color: var(--mainTheme);
+}
+
+#create-training-modal::-webkit-scrollbar-thumb{
+    background-color: var(--mainTheme);
 }
 
 #create-training-modal .button {
@@ -220,3 +233,34 @@ body{
     cursor: pointer;
     background-color: var(--mainThemeHover);
 }
+
+#trainingForm > *{
+    color: var(--fontColor);
+    text-align: center;
+}
+
+#workoutPlan{
+    width: 40vw;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#trainingForm textarea{
+    width: 20vw;
+    height: 15vh;
+    padding: 1.5vh 1.5vw 1.5vh 1.5vw;
+    resize: none;
+    border: 0px;
+    border-radius: 1vw; 
+    background-color: var(--mainTheme);
+}
+
+#trainingForm td, #trainingForm th, #trainingForm input{
+    text-align: center;
+    color: var(--fontColor);
+    padding: 1vh 0 1vh 0;
+    border: 0px;
+    border-radius: 1vw; 
+    background-color: var(--mainTheme);
+}
+
