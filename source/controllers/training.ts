@@ -31,17 +31,16 @@ const createTraining = (req: Request, res: Response, next: NextFunction) => {
 
 // GET
 const getAllTrainings = (req: Request, res: Response, next: NextFunction) => {
-    const user = req.user ?? null
+    const user = req.user ?? null;
     let query = {};
 
     if (user) {
         const id = user.userId as string;
         query = { userId: { $eq: id } };
-    }
-    else {
+    } else {
         return res.status(500).json({
-            message: "The token was not found."
-        })
+            message: 'The token was not found.'
+        });
     }
     /* // Must learn how to pass req.query parameters safely so as to use them
     if (req.query.workoutType) {
