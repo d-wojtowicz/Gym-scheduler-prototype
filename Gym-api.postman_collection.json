@@ -11,9 +11,28 @@
 			"item": [
 				{
 					"name": "api/get/trainings",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
 					"request": {
 						"method": "GET",
-						"header": [],
+						"header": [
+							{
+								"key": "",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
 						"url": "http://localhost:3000/api/get/trainings"
 					},
 					"response": []
@@ -34,7 +53,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"userId\": \"65fc381bfab183f8137d65ab\",\r\n    \"date\": \"2024-03-24\",\r\n    \"workoutType\": \"Gym\",\r\n    \"workoutPlan\": [\r\n        {\r\n            \"type\": \"RDL\",\r\n            \"weight_load\": 80,\r\n            \"sets\": 5,\r\n            \"repetitions\": 5\r\n        },\r\n        {\r\n            \"type\": \"Wykroki\",\r\n            \"weight_load\": 30,\r\n            \"sets\": 3,\r\n            \"repetitions\": 12\r\n        },\r\n        {\r\n            \"type\": \"Wyciskanie leżąc\",\r\n            \"weight_load\": 80,\r\n            \"sets\": 5,\r\n            \"repetitions\": 5\r\n        },\r\n        {\r\n            \"type\": \"Wiosłowanie\",\r\n            \"weight_load\": 45,\r\n            \"sets\": 5,\r\n            \"repetitions\": 5\r\n        },\r\n        {\r\n            \"type\": \"Wznosy hantli bokiem\",\r\n            \"weight_load\": 10,\r\n            \"sets\": 3,\r\n            \"repetitions\": 12\r\n        }\r\n    ]\r\n}",
+							"raw": "{\r\n    \"userId\": \"65fc381bfab183f8137d65ab\",\r\n    \"date\": \"2024-03-24\",\r\n    \"workoutType\": \"Gym\",\r\n    \"workoutPlan\": [\r\n        {\r\n            \"name\": \"RDL\",\r\n            \"weightLoad\": 80,\r\n            \"sets\": 5,\r\n            \"repetitions\": 5\r\n        },\r\n        {\r\n            \"name\": \"Wykroki\",\r\n            \"weightLoad\": 30,\r\n            \"sets\": 3,\r\n            \"repetitions\": 12\r\n        },\r\n        {\r\n            \"name\": \"Wyciskanie leżąc\",\r\n            \"weightLoad\": 80,\r\n            \"sets\": 5,\r\n            \"repetitions\": 5\r\n        },\r\n        {\r\n            \"name\": \"Wiosłowanie\",\r\n            \"weightLoad\": 45,\r\n            \"sets\": 5,\r\n            \"repetitions\": 5\r\n        },\r\n        {\r\n            \"name\": \"Wznosy hantli bokiem\",\r\n            \"weightLoad\": 10,\r\n            \"sets\": 3,\r\n            \"repetitions\": 12\r\n        }\r\n    ]\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -61,9 +80,21 @@
 				},
 				{
 					"name": "api/get/user/:_id",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
 					"request": {
 						"method": "GET",
 						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
 						"url": "http://localhost:3000/api/get/user/65e4d5e29bef82fbc1bd8d17"
 					},
 					"response": []
@@ -128,6 +159,101 @@
 						"method": "DELETE",
 						"header": [],
 						"url": "http://localhost:3000/api/delete/user/65e4d5e29bef82fbc1bd8d17"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "exercises",
+			"item": [
+				{
+					"name": "api/get/globalExercise",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"url": "http://localhost:3000/api/get/globalExercise"
+					},
+					"response": []
+				},
+				{
+					"name": "api/get/privateExercise",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "http://localhost:3000/api/get/privateExercise"
+					},
+					"response": []
+				},
+				{
+					"name": "api/create/globalExercise",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Martwy ciąg (Sumo)\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:3000/api/create/globalExercise"
+					},
+					"response": []
+				},
+				{
+					"name": "api/create/privateExercise",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": "http://localhost:3000/api/create/privateExercise"
+					},
+					"response": []
+				},
+				{
+					"name": "api/patch/privateExercise",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"userId\": \"6606a70744f368bcb66c909c\",\r\n    \"customExercises\": [\r\n        {\r\n            \"name\": \"Front Lever\"\r\n        }\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:3000/api/patch/privateExercise"
 					},
 					"response": []
 				}
