@@ -8,6 +8,8 @@ import logging from './config/logging';
 import config from './config/config';
 import mongoose from 'mongoose';
 import trainingRoutes from './routes/training';
+import privateExerciseRoutes from './routes/privateUserExercise';
+import globalExerciseRoutes from './routes/globalUserExercise';
 import userRoutes from './routes/user';
 import training from './controllers/training';
 import { verify } from 'jsonwebtoken';
@@ -60,6 +62,8 @@ router.use((req, res, next) => {
 });
 
 /** Routes of our API*/
+router.use('/api', privateExerciseRoutes);
+router.use('/api', globalExerciseRoutes);
 router.use('/api', trainingRoutes);
 router.use('/api', userRoutes);
 

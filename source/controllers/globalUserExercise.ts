@@ -4,7 +4,7 @@ import globalUserExercise from '../models/globalUserExercise';
 
 // POST
 const createGlobalExercise = (req: Request, res: Response, next: NextFunction) => {
-    let name = req.body;
+    let { name } = req.body;
 
     const globalExercise = new globalUserExercise({
         name

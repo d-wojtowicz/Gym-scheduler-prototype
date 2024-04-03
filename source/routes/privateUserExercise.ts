@@ -8,4 +8,6 @@ router.get('/get/privateExercise', controller.getAllPrivateExercises);
 
 router.post('/create/privateExercise', controller.createPrivateExercise);
 
+router.patch('/patch/privateExercise', controller.addCustomExercise);
+
 export = router;
