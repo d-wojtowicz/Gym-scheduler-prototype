@@ -1,15 +1,13 @@
 import mongoose, { Schema } from 'mongoose';
 import ITraining from '../interfaces/training';
 
-const ExerciseSchema: Schema = new Schema(
-    {
-        type: { type: String, required: true },
-        weight_load: { type: Number },
-        sets: { type: Number, required: true },
-        repetitions: { type: Number, required: true },
-        notes: { type: String }
-    }
-);
+const ExerciseSchema: Schema = new Schema({
+    name: { type: String, required: true },
+    weightLoad: { type: Number },
+    sets: { type: Number, required: true },
+    repetitions: { type: Number, required: true },
+    notes: { type: String }
+});
 
 const TrainingSchema: Schema = new Schema(
     {
