@@ -128,11 +128,12 @@ function addExercise() {
             let newInput = "";
 
             if (header == "name") {
-                newInput = generateUserExerciseList(token);
+                newInput = generateUserExerciseList(token, header, numberOfRows-1);
             } else {
                 newInput = document.createElement('input');
                 
                 newInput.setAttribute('type', 'text');
+                newInput.setAttribute('name', header + "-" + String(numberOfRows-1))
                 newInput.setAttribute('required', true);
                 newInput.setAttribute('id', workoutPlanTableHeaders[header] + "_" + String(numberOfRows));
                 newInput.setAttribute('list', 'exercises-list');
@@ -147,9 +148,10 @@ function addExercise() {
     }
 }
 
-function generateUserExerciseList(token) {
+function generateUserExerciseList(token, header, rowNumber) {
     const newSelect = document.createElement('select');
-    newSelect.className = "exercise-selector"
+    newSelect.className = "exercise-selector";
+    newSelect.name = header + "-" + rowNumber;
 
     // Add private exercises list
     fetch('/api/get/privateExercise', {
