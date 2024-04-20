@@ -4,13 +4,27 @@ const workoutPlanTableHeaders = {
     'sets': "Sets", 
     'repetitions': "Repetitions"
 };
+
 document.addEventListener('DOMContentLoaded', function() {
     const token = localStorage.getItem('token');
     if (!token) {
         window.location.href = '/';
         return;
     }
-    
+
+    loadTrainingPanel(token);
+
+    const form = document.getElementById('trainingForm');
+    form.addEventListener('submit', function(event) {
+        event.preventDefault();
+        addTraining(token, form);
+    });
+});
+
+
+
+/* SPECIFIC DATE TRAINING PANEL */
+function loadTrainingPanel(token) {
     const trainingDate = document.getElementById('training-date').innerText // Fix to download from token NOT from site element
     fetch(`/api/get/trainings/date/${trainingDate}`, {
         method: 'GET',
@@ -23,8 +37,11 @@ document.addEventListener('DOMContentLoaded', function() {
     .then(data => {
         const trainings = data.trainings;
         generateTrainingFields(trainings, 'main-training');
+    })
+    .catch(error => {
+        console.log(error.message);
     });
-});
+}
 
 function generateTrainingFields(trainings, containerId) {
     trainings.forEach(training => {
@@ -64,50 +81,68 @@ function generateTrainingFields(trainings, containerId) {
     });
 }
 
-function toggleModal(modalSwitch) {
-    if (modalSwitch) {
-        document.getElementById('main-container').style.opacity = 0.5;
-        document.getElementById('create-training-modal').style.display = "block";
-    } else {
-        document.getElementById('main-container').style.opacity = 1;
-        document.getElementById('create-training-modal').style.display = "none";
-    }
-}
-/* 
-function addTraining() {
-    const token = localStorage.getItem('token');
-    if (!token) {
-        window.location.href = '/';
-        return;
-    }
 
-    const workoutPlanTable = document.getElementById('workoutPlan');
-    const numberOfRows = workoutPlanTable.getElementsByTagName('tr').length;
 
-    if (workoutPlanTable) {
-        const rows = workoutPlanTable.rows;
+/* CREATE TRAINING MODAL */
+function addTraining(token, form) {
+    // Assigning the form data
+    const formData = new FormData(form);
+    const data = {}
+    formData.forEach((value, key) => {
+        data[key] = value;
+    });
 
-        console.log(workoutPlanTable.getElementsByTagName('tr')[1].children)
-    }
-
-    toggleModal(false);
-} */
-document.addEventListener('DOMContentLoaded', function() {
-    const form = document.getElementById('trainingForm');
-
-    form.addEventListener('submit', function(event) {
-        event.preventDefault();
-
-        const formData = new FormData(form);
-        const data = {}
-        formData.forEach((value, key) => {
-            data[key] = value;
+    // Fill the workoutPlan from the form data
+    const groupedData = {};
+    Object.keys(workoutPlanTableHeaders).forEach(headerKey => {
+        const dataKeys = Object.keys(data);
+        dataKeys.forEach(dataKey => {
+            if (dataKey.startsWith(headerKey)) {
+                const suffix = dataKey.split('-')[1]; // Suffix (number)
+                if (!groupedData[suffix]) {
+                    groupedData[suffix] = {};
+                }
+                let value = data[dataKey];
+                if (headerKey === 'weightLoad' || headerKey === 'sets' || headerKey === 'repetitions') {
+                    value = parseInt(value, 10);
+                }
+                groupedData[suffix][headerKey] = value;
+            }
         });
+    });
 
-        console.log(data, "CCC")
+    // Extract obligatory data
+    const date = document.getElementById('training-date').innerText
+    const workoutType = data.workoutType;
+    const workoutPlan = Object.values(groupedData);
+    const extraInformation = data.extraInformation;
+
+    // Inject data
+    fetch('/api/create/training', {
+        method: 'POST',
+        headers: {
+            'Authorization': `Bearer ${token}`,
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({date, workoutType, workoutPlan, extraInformation})
     })
-});
-/* PRZEROBIC ADDTRAINING WYZEJ NA LISTENERA KTORY WEZMIE Z FORMULARZA DANE, PRZENIESC SUBMIT DO FORMA */
+    .then(response => response.json())
+    .then(data => {
+        // If training is created (successful)
+        if (data.training) {
+            console.log('Training saved successfully');
+            document.getElementById('main-training').innerHTML = "";
+            toggleModal(false);
+            loadTrainingPanel(token);
+        }
+        if (data.message) {
+            console.log(data.message)
+        }
+    })
+    .catch(error => {
+        console.log(error.message)
+    });
+}
 
 function addExercise() {    
     const token = localStorage.getItem('token');
@@ -196,4 +231,14 @@ function generateUserExerciseList(token, header, rowNumber) {
     });
 
     return newSelect;
+}
+
+function toggleModal(modalSwitch) {
+    if (modalSwitch) {
+        document.getElementById('main-container').style.opacity = 0.5;
+        document.getElementById('create-training-modal').style.display = "block";
+    } else {
+        document.getElementById('main-container').style.opacity = 1;
+        document.getElementById('create-training-modal').style.display = "none";
+    }
 }

@@ -4,8 +4,13 @@ import Training from '../models/training';
 
 // POST
 const createTraining = (req: Request, res: Response, next: NextFunction) => {
-    let { userId, date, workoutType, workoutPlan, extraInformation } = req.body;
+    let { date, workoutType, workoutPlan, extraInformation } = req.body;
+    const user = req.user ?? null;
+    let userId = "";
 
+    if (user) {
+        userId = user.userId;
+    }
     const training = new Training({
         userId,
         date,
@@ -13,7 +18,7 @@ const createTraining = (req: Request, res: Response, next: NextFunction) => {
         workoutPlan,
         extraInformation
     });
-
+    
     return training
         .save()
         .then((result) => {
