@@ -183,12 +183,49 @@ body{
 
 
 /* Training page */
-.single-training{
-    width: 10vw;
-    height: 10vh;
+#main-training{
+    overflow-x: hidden;
+    overflow-y: auto;
+} 
 
-    background-color: red;
+.single-training{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background-color: var(--secondaryTheme);
 }
+
+.single-training table{
+    width: 48vw;
+    height: 54vh;
+
+    color: var(--fontColor);
+    table-layout: fixed;
+    text-align: center;
+    margin: 3vh 1vw 3vh 1vw;
+    border-radius: 2vw;
+    background-color: rgb(11, 11, 11);
+}
+
+.single-training table td{
+    background-color: rgb(23, 23, 23);
+}
+.single-training table td:hover{
+    cursor: pointer;
+    background-color: rgb(21, 21, 21);
+}
+
+.single-training table th, .single-training table td{
+    font-size: 18px;
+    border-radius: 1.5vw;
+}
+
+.single-training table th{
+    background-color: var(--mainTheme);
+}
+
+
 
 #create-training-modal {
     overflow-y: scroll;
@@ -207,15 +244,15 @@ body{
     transform: translate(-50%, -50%);
 }
 
-#create-training-modal::-webkit-scrollbar{
+#main-training::-webkit-scrollbar, #create-training-modal::-webkit-scrollbar{
     background-color: var(--mainThemeHover);
 }
 
-#create-training-modal::-webkit-scrollbar-button{
+#main-training::-webkit-scrollbar, #create-training-modal::-webkit-scrollbar-button{
     background-color: var(--mainTheme);
 }
 
-#create-training-modal::-webkit-scrollbar-thumb{
+#main-training::-webkit-scrollbar, #create-training-modal::-webkit-scrollbar-thumb{
     background-color: var(--mainTheme);
 }
 
@@ -264,3 +301,9 @@ body{
     background-color: var(--mainTheme);
 }
 
+.exercise-selector {
+    border: 0px;
+    background-color: var(--mainTheme);
+    font-weight: bold;
+    color: white;
+}
