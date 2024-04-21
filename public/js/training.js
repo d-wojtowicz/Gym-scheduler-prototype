@@ -156,6 +156,31 @@ function addTraining(token, form) {
     });
 }
 
+function removeTraining(id) {
+    const token = localStorage.getItem('token');
+    if (!token) {
+        window.location.href = '/';
+        return;
+    }
+
+    fetch(`/api/delete/training/${id}`, {
+        method: 'DELETE',
+        headers: {
+            'Authorization': `Bearer ${token}`,
+            'Content-Type': 'application/json',
+        },
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log(data);
+        document.getElementById('main-training').innerHTML = "";
+        loadTrainingPanel(token);
+    })
+    .catch(error => {
+        console.log(`The training could not be removed: ${error}`);
+    });
+}
+
 function addExercise() {    
     const token = localStorage.getItem('token');
     if (!token) {
@@ -195,29 +220,20 @@ function addExercise() {
     }
 }
 
-function removeTraining(id) {
+function removeExercise() {
     const token = localStorage.getItem('token');
     if (!token) {
         window.location.href = '/';
         return;
     }
 
-    fetch(`/api/delete/training/${id}`, {
-        method: 'DELETE',
-        headers: {
-            'Authorization': `Bearer ${token}`,
-            'Content-Type': 'application/json',
-        },
-    })
-    .then(response => response.json())
-    .then(data => {
-        console.log(data);
-        document.getElementById('main-training').innerHTML = "";
-        loadTrainingPanel(token);
-    })
-    .catch(error => {
-        console.log(`The training could not be removed: ${error}`);
-    });
+    const workoutPlanTable = document.getElementById('workoutPlan');
+    const numberOfRows = workoutPlanTable.getElementsByTagName('tr').length;
+    const MIN_EXERCISE_NUMBER = 1;
+
+    if (numberOfRows > MIN_EXERCISE_NUMBER) {
+        workoutPlanTable.removeChild(workoutPlanTable.lastChild)
+    }
 }
 
 function generateUserExerciseList(token, header, rowNumber) {
