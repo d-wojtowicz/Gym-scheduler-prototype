@@ -6,7 +6,7 @@ import Training from '../models/training';
 const createTraining = (req: Request, res: Response, next: NextFunction) => {
     let { date, workoutType, workoutPlan, extraInformation } = req.body;
     const user = req.user ?? null;
-    let userId = "";
+    let userId = '';
 
     if (user) {
         userId = user.userId;
@@ -18,7 +18,7 @@ const createTraining = (req: Request, res: Response, next: NextFunction) => {
         workoutPlan,
         extraInformation
     });
-    
+
     return training
         .save()
         .then((result) => {
@@ -102,8 +102,56 @@ const getTrainingByDate = (req: Request, res: Response, next: NextFunction) => {
         });
 };
 
+// DELETE
+const removeTraining = (req: Request, res: Response, next: NextFunction) => {
+    const _id = req.params.id;
+
+    if (!_id) {
+        return res.status(400).json({
+            message: 'No training ID provided.'
+        });
+    }
+
+    Training.findById(_id)
+        .exec()
+        .then((training) => {
+            if (!training) {
+                return res.status(404).json({
+                    message: 'Training not found.'
+                });
+            }
+
+            // Check if actual user is owner of this training
+            const user = req.user ?? null;
+            if (user) {
+                const userId = user.userId as String;
+                const trainingUserId = training.userId.toString();
+                if (trainingUserId !== userId) {
+                    return res.status(403).json({
+                        message: 'Unauthorized to delete this training.'
+                    });
+                }
+            }
+
+            Training.deleteOne({ _id: _id })
+                .exec()
+                .then(() => {
+                    return res.status(200).json({
+                        message: 'Training deleted successfully.'
+                    });
+                });
+        })
+        .catch((error) => {
+            return res.status(500).json({
+                message: error.message,
+                error
+            });
+        });
+};
+
 export default {
     createTraining,
     getAllTrainings,
-    getTrainingByDate
+    getTrainingByDate,
+    removeTraining
 };

@@ -268,7 +268,7 @@ body{
     background-color: var(--mainTheme);
 }
 
-#create-training-modal .button {
+#create-training-modal .button, #main-training .button {
     width: 10vw;
     height: 5vh;
 
@@ -278,7 +278,7 @@ body{
     color: var(--fontColor);
 }
 
-#create-training-modal .button:hover {
+#create-training-modal .button:hover, #main-training .button:hover {
     cursor: pointer;
     background-color: var(--mainThemeHover);
 }

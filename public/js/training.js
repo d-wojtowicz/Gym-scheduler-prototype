@@ -43,6 +43,14 @@ function loadTrainingPanel(token) {
     });
 }
 
+function generateButton(training) {
+    const removeTrainingButton = document.createElement('button');
+    removeTrainingButton.setAttribute('class', 'button');
+    removeTrainingButton.setAttribute('onClick', `removeTraining('${training._id}')`);
+    removeTrainingButton.innerText = "REMOVE";
+    return removeTrainingButton;
+}
+
 function generateTrainingFields(trainings, containerId) {
     trainings.forEach(training => {
         const singleTrainingContainer = document.createElement('div');
@@ -74,8 +82,12 @@ function generateTrainingFields(trainings, containerId) {
             singleTrainingPlan.appendChild(singleExerciseRow);
         });
 
+        // Generate 'remove training' button
+        const singleTrainingButton = generateButton(training);
+
         //singleTrainingContainer.appendChild(singleTrainingTitle);
         singleTrainingContainer.appendChild(singleTrainingPlan);
+        document.getElementById(containerId).appendChild(singleTrainingButton);
         document.getElementById(containerId).appendChild(singleTrainingContainer);
         document.getElementById(containerId).appendChild(document.createElement('br'));
     });
@@ -181,6 +193,31 @@ function addExercise() {
     } else {
         // TODO: Add modal informing about exceeding the MAX EXERCISE NUMBER
     }
+}
+
+function removeTraining(id) {
+    const token = localStorage.getItem('token');
+    if (!token) {
+        window.location.href = '/';
+        return;
+    }
+
+    fetch(`/api/delete/training/${id}`, {
+        method: 'DELETE',
+        headers: {
+            'Authorization': `Bearer ${token}`,
+            'Content-Type': 'application/json',
+        },
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log(data);
+        document.getElementById('main-training').innerHTML = "";
+        loadTrainingPanel(token);
+    })
+    .catch(error => {
+        console.log(`The training could not be removed: ${error}`);
+    });
 }
 
 function generateUserExerciseList(token, header, rowNumber) {

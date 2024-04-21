@@ -9,4 +9,6 @@ router.get('/get/trainings/date/:date', verifyToken, controller.getTrainingByDat
 
 router.post('/create/training', verifyToken, controller.createTraining);
 
+router.delete('/delete/training/:id', verifyToken, controller.removeTraining);
+
 export = router;
