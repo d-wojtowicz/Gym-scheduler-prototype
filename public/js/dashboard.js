@@ -18,7 +18,7 @@ document.addEventListener('DOMContentLoaded', function() {
         // TODO: Adjust the dependence of dates on scrolling calendar pages rather than the current month
         const specifiedMonth = new Date();
         generateDateTitle(specifiedMonth);
-        generateCalendar(specifiedMonth, 'main-calendar-month');
+        generateCalendar(specifiedMonth, 'main-calendar-month', data);
     });
 });
 
@@ -30,7 +30,7 @@ function generateDateTitle(specifiedMonth){
     document.getElementById('month').innerText = actualMonth + ' ' + actualYear;
 }
 
-function generateCalendar(specifiedMonth, containerId) {
+function generateCalendar(specifiedMonth, containerId, data) {
     let firstDayOfMonth = new Date(specifiedMonth.getFullYear(), specifiedMonth.getMonth(), 1).getDay();
     firstDayOfMonth = firstDayOfMonth === 0 ? 6 : firstDayOfMonth - 1;
 
@@ -61,7 +61,7 @@ function generateCalendar(specifiedMonth, containerId) {
             if (week === 0 && dayOfWeek < firstDayOfMonth || daysLeft <= 0) {
                 singleWeek.appendChild(generateDayCell(null)); // Empty cell
             } else {
-                singleWeek.appendChild(generateDayCell(dayCounter, specifiedMonth));
+                singleWeek.appendChild(generateDayCell(dayCounter, specifiedMonth, data));
                 dayCounter++;
                 daysLeft--;
             }
@@ -70,12 +70,17 @@ function generateCalendar(specifiedMonth, containerId) {
     }
 }
 
-function generateDayCell(day, specifiedMonth) {
+function generateDayCell(day, specifiedMonth, data) {
     const singleDay = document.createElement('td');
     if (day !== null) {
         const formattedDate = customizeDateFormat(day, specifiedMonth);
         singleDay.setAttribute('id', formattedDate);
         singleDay.setAttribute('class', 'td-active');
+        data.trainings.forEach(singleTraining => {
+            if (singleTraining.date.slice(0,10) == customizeDateFormat(day, specifiedMonth)) {
+                singleDay.setAttribute('class', 'cell-active-training');
+            }
+        });
         singleDay.setAttribute('onClick', `location.href="/dashboard/${formattedDate}"`);
         singleDay.innerText = day;
     } else {

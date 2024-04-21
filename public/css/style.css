@@ -180,7 +180,19 @@ body{
     background-color: var(--mainTheme);
 }
 
+.cell-active-training {
+    background-color: rgb(23, 23, 23);
+    opacity: 0.8;
+    background-image: url('../images/training.png');
+    background-size: 100% 100%;
+}
 
+.cell-active-training:hover {
+    cursor: pointer;
+    opacity: 0.6;
+    background-color: rgb(21, 21, 21);
+    background-image: url('../images/training.png');
+}
 
 /* Training page */
 #main-training{
