@@ -53,7 +53,7 @@ body{
     margin-bottom: 10vh;
 }
 
-#loginForm > *, #registerForm > *, #trainingForm > *{
+#loginForm > *, #registerForm > *, #createTrainingForm > *, #editTrainingForm > *{
     margin: 10px;
 }
 
@@ -239,7 +239,7 @@ body{
 
 
 
-#create-training-modal {
+#create-training-modal, #edit-training-modal{
     overflow-y: scroll;
     display: none;
     width: 50vw;
@@ -256,19 +256,19 @@ body{
     transform: translate(-50%, -50%);
 }
 
-#main-training::-webkit-scrollbar, #create-training-modal::-webkit-scrollbar{
+#main-training::-webkit-scrollbar, #create-training-modal::-webkit-scrollbar, #edit-training-modal::-webkit-scrollbar{
     background-color: var(--mainThemeHover);
 }
 
-#main-training::-webkit-scrollbar, #create-training-modal::-webkit-scrollbar-button{
+#main-training::-webkit-scrollbar, #create-training-modal::-webkit-scrollbar-button, #edit-training-modal::-webkit-scrollbar-button{
     background-color: var(--mainTheme);
 }
 
-#main-training::-webkit-scrollbar, #create-training-modal::-webkit-scrollbar-thumb{
+#main-training::-webkit-scrollbar, #create-training-modal::-webkit-scrollbar-thumb, #edit-training-modal::-webkit-scrollbar-thumb{
     background-color: var(--mainTheme);
 }
 
-#create-training-modal .button, #main-training .button {
+#create-training-modal .button, #main-training .button, #edit-training-modal .button {
     width: 10vw;
     height: 5vh;
 
@@ -278,23 +278,23 @@ body{
     color: var(--fontColor);
 }
 
-#create-training-modal .button:hover, #main-training .button:hover {
+#create-training-modal .button:hover, #main-training .button:hover, #edit-training-modal .button:hover {
     cursor: pointer;
     background-color: var(--mainThemeHover);
 }
 
-#trainingForm > *{
+#createTrainingForm > *, #editTrainingForm > *{
     color: var(--fontColor);
     text-align: center;
 }
 
-#workoutPlan{
+#workoutPlan, #workoutPlanEdit{
     width: 40vw;
     margin-left: auto;
     margin-right: auto;
 }
 
-#trainingForm textarea{
+#createTrainingForm textarea, #editTrainingForm textarea{
     width: 20vw;
     height: 15vh;
     padding: 1.5vh 1.5vw 1.5vh 1.5vw;
@@ -304,7 +304,7 @@ body{
     background-color: var(--mainTheme);
 }
 
-#trainingForm td, #trainingForm th, #trainingForm input{
+#createTrainingForm td, #createTrainingForm th, #createTrainingForm input, #editTrainingForm td, #editTrainingForm th, #editTrainingForm input{
     text-align: center;
     color: var(--fontColor);
     padding: 1vh 0 1vh 0;

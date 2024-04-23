@@ -14,7 +14,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     loadTrainingPanel(token);
 
-    const form = document.getElementById('trainingForm');
+    const form = document.getElementById('createTrainingForm');
     form.addEventListener('submit', function(event) {
         event.preventDefault();
         addTraining(token, form);
@@ -43,12 +43,22 @@ function loadTrainingPanel(token) {
     });
 }
 
-function generateButton(training) {
+function generateButtons(training) {
+    const buttonsHeader = document.createElement('div');
+
     const removeTrainingButton = document.createElement('button');
     removeTrainingButton.setAttribute('class', 'button');
     removeTrainingButton.setAttribute('onClick', `removeTraining('${training._id}')`);
     removeTrainingButton.innerText = "REMOVE";
-    return removeTrainingButton;
+    buttonsHeader.appendChild(removeTrainingButton);
+
+    const editTrainingButton = document.createElement('button');
+    editTrainingButton.setAttribute('class', 'button');
+    editTrainingButton.setAttribute('onClick', `toggleEditTrainingModal(true, '${training._id}')`);
+    editTrainingButton.innerText = "EDIT";
+    buttonsHeader.appendChild(editTrainingButton);
+
+    return buttonsHeader;
 }
 
 function generateTrainingFields(trainings, containerId) {
@@ -82,12 +92,12 @@ function generateTrainingFields(trainings, containerId) {
             singleTrainingPlan.appendChild(singleExerciseRow);
         });
 
-        // Generate 'remove training' button
-        const singleTrainingButton = generateButton(training);
+        // Generate 'remove & edit training' buttons
+        const trainingButtons = generateButtons(training);
 
         //singleTrainingContainer.appendChild(singleTrainingTitle);
         singleTrainingContainer.appendChild(singleTrainingPlan);
-        document.getElementById(containerId).appendChild(singleTrainingButton);
+        document.getElementById(containerId).appendChild(trainingButtons);
         document.getElementById(containerId).appendChild(singleTrainingContainer);
         document.getElementById(containerId).appendChild(document.createElement('br'));
     });
@@ -144,7 +154,7 @@ function addTraining(token, form) {
         if (data.training) {
             console.log('Training saved successfully');
             document.getElementById('main-training').innerHTML = "";
-            toggleModal(false);
+            toggleCreateTrainingModal(false);
             loadTrainingPanel(token);
         }
         if (data.message) {
@@ -181,14 +191,14 @@ function removeTraining(id) {
     });
 }
 
-function addExercise() {    
+function addExercise(planId) {    
     const token = localStorage.getItem('token');
     if (!token) {
         window.location.href = '/';
         return;
     }
 
-    const workoutPlanTable = document.getElementById('workoutPlan');
+    const workoutPlanTable = document.getElementById(planId);
     const numberOfRows = workoutPlanTable.getElementsByTagName('tr').length;
     const MAX_EXERCISE_NUMBER = 8;
 
@@ -220,14 +230,14 @@ function addExercise() {
     }
 }
 
-function removeExercise() {
+function removeExercise(planId) {
     const token = localStorage.getItem('token');
     if (!token) {
         window.location.href = '/';
         return;
     }
 
-    const workoutPlanTable = document.getElementById('workoutPlan');
+    const workoutPlanTable = document.getElementById(planId);
     const numberOfRows = workoutPlanTable.getElementsByTagName('tr').length;
     const MIN_EXERCISE_NUMBER = 1;
 
@@ -236,10 +246,16 @@ function removeExercise() {
     }
 }
 
-function generateUserExerciseList(token, header, rowNumber) {
-    const newSelect = document.createElement('select');
+function generateUserExerciseList(token, header, rowNumber, value) {
+    let newSelect = document.createElement('select');
     newSelect.className = "exercise-selector";
-    newSelect.name = header + "-" + rowNumber;
+    if (value) {
+        newSelect.name = header + "Edit-" + rowNumber;  
+        newSelect.setAttribute('id', header + "Edit-" + rowNumber)
+    } else {
+        newSelect.name = header + "-" + rowNumber;
+        newSelect.setAttribute('id', header + "-" + rowNumber)
+    }
 
     // Add private exercises list
     fetch('/api/get/privateExercise', {
@@ -286,7 +302,7 @@ function generateUserExerciseList(token, header, rowNumber) {
     return newSelect;
 }
 
-function toggleModal(modalSwitch) {
+function toggleCreateTrainingModal(modalSwitch) {
     if (modalSwitch) {
         document.getElementById('main-container').style.opacity = 0.5;
         document.getElementById('create-training-modal').style.display = "block";
@@ -295,3 +311,104 @@ function toggleModal(modalSwitch) {
         document.getElementById('create-training-modal').style.display = "none";
     }
 }
+
+
+
+/* EDIT TRAINING MODAL */
+function toggleEditTrainingModal(modalSwitch, trainingId) {
+    if (trainingId) {
+        const token = localStorage.getItem('token');
+        if (!token) {
+            window.location.href = '/';
+            return;
+        }
+
+        fetch(`/api/get/trainings/id/${trainingId}`, {
+            method: 'GET',
+            headers: {
+                'Authorization': `Bearer ${token}`,
+                'Content-Type': 'application/json',
+            },
+        })
+        .then(response => response.json())
+        .then(data => {
+            const trainingInfo = data.training[0];
+            const workoutType = trainingInfo.workoutType;
+            const workoutPlan = trainingInfo.workoutPlan;
+            const extraInformation = trainingInfo.extraInformation;
+            fillEditTrainingModal(workoutType, workoutPlan, extraInformation);
+        });
+    }
+    if (modalSwitch) {
+        document.getElementById('main-container').style.opacity = 0.5;
+        document.getElementById('edit-training-modal').style.display = "block";
+    } else {
+        document.getElementById('main-container').style.opacity = 1;
+        document.getElementById('edit-training-modal').style.display = "none";
+    }
+}
+
+function fillEditTrainingModal(workoutType, workoutPlan, extraInformation) {
+    const token = localStorage.getItem('token');
+    if (!token) {
+        window.location.href = '/';
+        return;
+    }
+
+    document.getElementById('workoutTypeEdit').value = workoutType;
+    document.getElementById('extraInformationEdit').value = extraInformation;
+
+    const workoutPlanTable = document.getElementById('workoutPlanEdit');
+    let numberOfRows = workoutPlanTable.getElementsByTagName('tr').length;
+
+    if (numberOfRows == 1) {
+        workoutPlan.forEach(singleExerciseRow => {
+            const newRow = document.createElement('tr');
+            Object.keys(workoutPlanTableHeaders).forEach(header => {
+                const newCell = document.createElement('td');
+                let newInput = "";
+
+                if (header == "name") {
+                    newInput = generateUserExerciseList(token, header, numberOfRows-1, singleExerciseRow[header]);
+                } else {
+                    newInput = document.createElement('input');
+
+                    newInput.setAttribute('type', 'text');
+                    newInput.setAttribute('name', header + "Edit-" + String(numberOfRows-1));
+                    newInput.setAttribute('required', true);
+                    newInput.setAttribute('value', singleExerciseRow[header]);
+                    newInput.setAttribute('id', workoutPlanTableHeaders[header] + "Edit_" + String(numberOfRows));
+                    newInput.setAttribute('list', 'exercises-list');
+                }
+                newCell.appendChild(newInput);
+                newRow.appendChild(newCell);
+            });
+            workoutPlanTable.appendChild(newRow);
+            fillSelectedExerciseNames(workoutPlanTable, singleExerciseRow["name"]);
+            numberOfRows = workoutPlanTable.getElementsByTagName('tr').length;
+        });       
+    }
+}
+
+/* 
+I NEED TO REPAIR THIS ONE
+function fillSelectedExerciseNames(parent, value) {
+    const newRow = parent.lastChild;
+    const exerciseNameCell = newRow.firstChild;
+
+
+    console.log(numberOfOptions)
+    for (let i = 0; i < options.length; i++) {
+        if (options[i].innerText === value) {
+            index = i;
+            break;
+        }
+    }
+
+    if (index !== -1) {
+        newSelect.options[index].selected = true;
+        newSelect.value = value;
+    }
+
+    return newSelect;
+} */

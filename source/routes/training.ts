@@ -5,6 +5,7 @@ import verifyToken from '../../public/js/verifyToken';
 const router = express.Router();
 
 router.get('/get/trainings', verifyToken, controller.getAllTrainings);
+router.get('/get/trainings/id/:id', verifyToken, controller.getTrainingByID);
 router.get('/get/trainings/date/:date', verifyToken, controller.getTrainingByDate);
 
 router.post('/create/training', verifyToken, controller.createTraining);

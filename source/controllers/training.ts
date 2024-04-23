@@ -69,6 +69,32 @@ const getAllTrainings = (req: Request, res: Response, next: NextFunction) => {
             });
         });
 };
+const getTrainingByID = (req: Request, res: Response, next: NextFunction) => {
+    const trainingID = req.params.id;
+
+    if (!trainingID) {
+        return res.status(400).json({
+            message: 'No date provided.'
+        });
+    }
+
+    Training.find({
+        _id: { $eq: trainingID }
+    })
+        .exec()
+        .then((results) => {
+            return res.status(200).json({
+                training: results
+            });
+        })
+        .catch((error) => {
+            return res.status(500).json({
+                message: error.message,
+                error
+            });
+        });
+};
+
 const getTrainingByDate = (req: Request, res: Response, next: NextFunction) => {
     const trainingsDate = req.params.date;
 
@@ -152,6 +178,7 @@ const removeTraining = (req: Request, res: Response, next: NextFunction) => {
 export default {
     createTraining,
     getAllTrainings,
+    getTrainingByID,
     getTrainingByDate,
     removeTraining
 };

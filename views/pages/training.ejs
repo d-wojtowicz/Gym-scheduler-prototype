@@ -17,7 +17,7 @@
                     <!-- Filled by server.ts -->
                     <%= trainingDate %>
                 </h1>
-                <button id="right-button" class="button" onClick="toggleModal(true)">+</button>
+                <button id="right-button" class="button" onClick="toggleCreateTrainingModal(true)">+</button>
             </div>
             <div id="main-training">
                 <!-- Filled by training.js -->
@@ -26,12 +26,12 @@
         <div id="create-training-modal">
             <h1>Create training</h1>
             <!-- workoutType workoutPlan (type, weight_load, sets, repetitions, extraInformation) -->
-            <form id="trainingForm">
+            <form id="createTrainingForm">
                 <label for="workoutType">Workout type:</label><br>
                 <input type="text" id="workoutType" name="workoutType" required placeholder="Gym"><br>
                 <label for="workoutPlan">Workout plan:</label><br>
-                <button class="button" onClick="addExercise()" type="button">+</button>
-                <button class="button" onClick="removeExercise()" type="button">-</button>
+                <button class="button" onClick="addExercise('workoutPlan')" type="button">+</button>
+                <button class="button" onClick="removeExercise('workoutPlan')" type="button">-</button>
                 <table id=workoutPlan>
                     <tr>
                         <th>Type</th>
@@ -44,7 +44,30 @@
                 <label for="extraInformation">Extra information:</label><br>
                 <textarea id="extraInformation" name="extraInformation"></textarea><br>
                 <button class="button" type="submit">Add</button>
-                <button class="button" onClick="toggleModal(false)" type="button">Close</button>
+                <button class="button" onClick="toggleCreateTrainingModal(false)" type="button">Close</button>
+            </form>
+        </div>
+        <div id="edit-training-modal">
+            <h1>Edit training</h1>
+            <form id="editTrainingForm">
+                <label for="workoutTypeEdit">Workout type:</label><br>
+                <input type="text" id="workoutTypeEdit" name="workoutTypeEdit" required><br>
+                <label for="workoutPlanEdit">Workout plan:</label><br>
+                <button class="button" onClick="addExercise('workoutPlanEdit')" type="button">+</button>
+                <button class="button" onClick="removeExercise('workoutPlanEdit')" type="button">-</button>
+                <table id="workoutPlanEdit">
+                    <tr>
+                        <th>Type</th>
+                        <th>Weight load</th>
+                        <th>Sets</th>
+                        <th>Repetitions</th>
+                    </tr>
+                    <!-- Generate rest of the table based on selected training to edit -->
+                </table>
+                <label for="extraInformationEdit">Extra information:</label><br>
+                <textarea id="extraInformationEdit" name="extraInformationEdit"></textarea><br>
+                <button class="button" type="submit">Save</button>
+                <button class="button" onClick="toggleEditTrainingModal(false)" type="button">Close</button>
             </form>
         </div>
         <script src="../js/training.js"></script>
