@@ -1,0 +1,321 @@
+
+/* Body & Theme */
+body{
+    background-image: url('../images/homepage-background.png');
+    background-size: cover;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', 'Arial';
+}
+
+:root {
+    /* --mainTheme: rgb(0, 38, 48); */
+    --mainTheme: rgb(40, 0, 0);
+    --mainThemeHover: rgb(50, 0, 0);
+    --secondaryTheme: rgb(80, 0, 0);
+    --secondaryThemeHover: rgb(90, 0, 0);
+    --fontColor: white;
+}
+
+/* Login & Register page */
+#loginPage .container, #registerPage .container{
+    padding-top: 5vh;
+    width: 40vw;
+
+    text-align: center;
+    color: rgb(151, 151, 151);
+    background: linear-gradient(to bottom, rgba(31, 31, 31, 1), rgba(31,31,31,0.7));
+    border-radius: 3vw;
+
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+#loginPage a, #registerPage a{
+    color: rgb(151, 151, 151);
+}
+#loginPage a:hover, #registerPage a:hover{
+    color: rgb(100, 100, 100);
+}
+
+#loginForm input, #registerPage input{
+    width: 15vw;
+    height: 3vh;
+
+    text-align: center;
+    font-weight: bold;
+    background-color: rgb(235, 235, 235);
+    border-radius: 3vw;
+}
+
+#loginForm, #registerForm {
+    margin-top: 5vh;
+    margin-bottom: 10vh;
+}
+
+#loginForm > *, #registerForm > *, #createTrainingForm > *, #editTrainingForm > *{
+    margin: 10px;
+}
+
+#loginForm button, #registerForm button{
+    width: 10vw;
+    height: 4vh;
+
+    font-weight: bold;
+    background-color: rgb(151, 151, 151);
+    border-radius: 1vw;
+}
+
+#loginForm button:hover, #registerForm button:hover{
+    background-color: grey;
+}
+
+#loginResponse, #registerResponse {
+    color: rgb(161, 0, 0)
+}
+
+
+/* Single training page */
+.trainingTable{
+    border: 2px solid black;
+    border-collapse: collapse;
+}
+
+.trainingTable tr{
+    border: 1px solid black;
+}
+
+.trainingTable td{
+    text-align: center;
+    padding: 10px;
+}
+
+.trainingTable th{
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+
+/* Calendar page */
+#main-controller {
+    width: 50vw;
+    max-height: 15vh;
+
+    border-radius: 2vw;
+    color: var(--fontColor);
+    text-align: center;
+    background-color: var(--mainTheme);
+
+    position: absolute;
+    top: 10%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+#main-controller .button{
+    width: 5vw;
+
+    border: 10px solid var(--mainTheme);
+    background-color: var(--secondaryTheme);
+    color: var(--fontColor);
+
+    position: absolute;
+    top: 0;
+    bottom: 0;
+}
+
+#main-controller .button:hover{
+    cursor: pointer;
+    background-color: var(--secondaryThemeHover);
+}
+
+#left-button{
+    left: 0;
+}
+#right-button{
+    right: 0;
+}
+
+#main-calendar, #main-training{
+    width: 50vw;
+    height: 60vh;
+    
+    background-color: var(--mainTheme);
+
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+#main-calendar-month{
+    width: 48vw;
+    height: 54vh;
+
+    color: var(--fontColor);
+    table-layout: fixed;
+    text-align: center;
+    margin: 3vh 1vw 3vh 1vw;
+    border-radius: 2vw;
+    background-color: rgb(11, 11, 11);
+}
+
+.td-active{
+    background-color: rgb(23, 23, 23);
+}
+.td-active:hover{
+    cursor: pointer;
+    background-color: rgb(21, 21, 21);
+}
+.td-inactive{
+    background-color: rgb(15, 15, 15);
+}
+
+#main-calendar-month th, #main-calendar-month td{
+    font-size: 18px;
+    border-radius: 1.5vw;
+}
+
+#main-calendar-month th{
+    background-color: var(--mainTheme);
+}
+
+.cell-active-training {
+    background-color: rgb(23, 23, 23);
+    opacity: 0.8;
+    background-image: url('../images/training.png');
+    background-size: 100% 100%;
+}
+
+.cell-active-training:hover {
+    cursor: pointer;
+    opacity: 0.6;
+    background-color: rgb(21, 21, 21);
+    background-image: url('../images/training.png');
+}
+
+/* Training page */
+#main-training{
+    overflow-x: hidden;
+    overflow-y: auto;
+} 
+
+.single-training{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background-color: var(--secondaryTheme);
+}
+
+.single-training table{
+    width: 48vw;
+    height: 54vh;
+
+    color: var(--fontColor);
+    table-layout: fixed;
+    text-align: center;
+    margin: 3vh 1vw 3vh 1vw;
+    border-radius: 2vw;
+    background-color: rgb(11, 11, 11);
+}
+
+.single-training table td{
+    background-color: rgb(23, 23, 23);
+}
+.single-training table td:hover{
+    cursor: pointer;
+    background-color: rgb(21, 21, 21);
+}
+
+.single-training table th, .single-training table td{
+    font-size: 18px;
+    border-radius: 1.5vw;
+}
+
+.single-training table th{
+    background-color: var(--mainTheme);
+}
+
+
+
+#create-training-modal, #edit-training-modal{
+    overflow-y: scroll;
+    display: none;
+    width: 50vw;
+    height: 70vh;
+    padding: 3vw 3vh 3vw 3vh;
+
+    color: var(--fontColor);
+    background-color: var(--secondaryTheme);
+    text-align: center;
+
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+#main-training::-webkit-scrollbar, #create-training-modal::-webkit-scrollbar, #edit-training-modal::-webkit-scrollbar{
+    background-color: var(--mainThemeHover);
+}
+
+#main-training::-webkit-scrollbar, #create-training-modal::-webkit-scrollbar-button, #edit-training-modal::-webkit-scrollbar-button{
+    background-color: var(--mainTheme);
+}
+
+#main-training::-webkit-scrollbar, #create-training-modal::-webkit-scrollbar-thumb, #edit-training-modal::-webkit-scrollbar-thumb{
+    background-color: var(--mainTheme);
+}
+
+#create-training-modal .button, #main-training .button, #edit-training-modal .button {
+    width: 10vw;
+    height: 5vh;
+
+    font-weight: bold;
+    border: 1px solid var(--secondaryTheme);
+    background-color: var(--mainTheme);
+    color: var(--fontColor);
+}
+
+#create-training-modal .button:hover, #main-training .button:hover, #edit-training-modal .button:hover {
+    cursor: pointer;
+    background-color: var(--mainThemeHover);
+}
+
+#createTrainingForm > *, #editTrainingForm > *{
+    color: var(--fontColor);
+    text-align: center;
+}
+
+#workoutPlan, #workoutPlanEdit{
+    width: 40vw;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#createTrainingForm textarea, #editTrainingForm textarea{
+    width: 20vw;
+    height: 15vh;
+    padding: 1.5vh 1.5vw 1.5vh 1.5vw;
+    resize: none;
+    border: 0px;
+    border-radius: 1vw; 
+    background-color: var(--mainTheme);
+}
+
+#createTrainingForm td, #createTrainingForm th, #createTrainingForm input, #editTrainingForm td, #editTrainingForm th, #editTrainingForm input{
+    text-align: center;
+    color: var(--fontColor);
+    padding: 1vh 0 1vh 0;
+    border: 0px;
+    border-radius: 1vw; 
+    background-color: var(--mainTheme);
+}
+
+.exercise-selector {
+    border: 0px;
+    background-color: var(--mainTheme);
+    font-weight: bold;
+    color: white;
+}

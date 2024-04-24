@@ -1,14 +1,28 @@
+// TODO: Refactor page routes, controllers; include EJS.
+// TODO!!!: Take interest in a token (Should all information be sent in token? If yes - fix reading in .js files)
+import * as path from 'path';
 import http from 'http';
 import express from 'express';
 import bodyParser from 'body-parser';
 import logging from './config/logging';
 import config from './config/config';
 import mongoose from 'mongoose';
+import templateRoutes from './routes/template';
 import trainingRoutes from './routes/training';
+import privateExerciseRoutes from './routes/privateUserExercise';
+import globalExerciseRoutes from './routes/globalUserExercise';
+import userRoutes from './routes/user';
 import training from './controllers/training';
+import { verify } from 'jsonwebtoken';
+import verifyToken from '../public/js/verifyToken';
 
 const NAMESPACE = 'Server';
 const router = express();
+
+/** Configure the EJS */
+router.set('view engine', 'ejs');
+router.set('views', path.join(__dirname, '../views'));
+router.use(express.static(path.join(__dirname, '../public')));
 
 /** Connect to Mongo */
 mongoose
@@ -48,8 +62,19 @@ router.use((req, res, next) => {
     next();
 });
 
-/** Routes */
-router.use('/training', trainingRoutes);
+/** Routes of our API*/
+router.use('/api', privateExerciseRoutes);
+router.use('/api', globalExerciseRoutes);
+router.use('/api', templateRoutes);
+router.use('/api', trainingRoutes);
+router.use('/api', userRoutes);
+
+/** Routes of our site */
+router.get('/', (req, res) => res.render('pages/login'));
+router.get('/login', (req, res) => res.render('pages/login'));
+router.get('/register', (req, res) => res.render('pages/register'));
+router.get('/dashboard', (req, res) => res.render('pages/dashboard'));
+router.get('/dashboard/:date', (req, res) => res.render('pages/training', { trainingDate: req.params.date }));
 
 /** Create the server */
 const httpServer = http.createServer(router);

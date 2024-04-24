@@ -15,3 +15,9 @@ npm run build
 npm install mongoose
 
 npm install --save-dev @types/mongoose
+
+npm install bcryptjs jsonwebtoken
+
+npm install --save-dev @types/bcryptjs @types/jsonwebtoken
+
+nodemon source/server.ts
