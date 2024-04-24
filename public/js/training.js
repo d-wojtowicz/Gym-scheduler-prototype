@@ -64,6 +64,18 @@ function generateButtons(training) {
     editTrainingButton.innerText = "EDIT";
     buttonsHeader.appendChild(editTrainingButton);
 
+    const aTemplateButton = document.createElement('button');
+    aTemplateButton.setAttribute('class', 'button');
+    aTemplateButton.setAttribute('onClick', `saveTemplate('A', '${training._id}')`)
+    aTemplateButton.innerText = "Save as A";
+    buttonsHeader.appendChild(aTemplateButton);
+
+    const bTemplateButton = document.createElement('button');
+    bTemplateButton.setAttribute('class', 'button');
+    bTemplateButton.setAttribute('onClick', `saveTemplate('B', '${training._id}')`)
+    bTemplateButton.innerText = "Save as B";
+    buttonsHeader.appendChild(bTemplateButton);
+
     return buttonsHeader;
 }
 
@@ -446,7 +458,7 @@ function editTraining() {
             }
         });
     });
-    
+
     // Extract obligatory data
     const workoutPlanEdit = document.getElementById('workoutPlanEdit');
     const containerId = workoutPlanEdit.getElementsByTagName('tbody')[0];
@@ -482,4 +494,45 @@ function editTraining() {
     .catch(error => {
         console.log(error.message)
     });
+}
+
+
+
+/* TEMPLATES */
+function saveTemplate(templateNum, trainingId) {
+    if (trainingId) {
+        const token = localStorage.getItem('token');
+        if (!token) {
+            window.location.href = '/';
+            return;
+        }
+
+        fetch(`/api/get/trainings/id/${trainingId}`, {
+            method: 'GET',
+            headers: {
+                'Authorization': `Bearer ${token}`,
+                'Content-Type': 'application/json',
+            },
+        })
+        .then(response => response.json())
+        .then(data => {
+            const trainingInfo = data.training[0];
+            const workoutType = trainingInfo.workoutType;
+            const workoutPlan = trainingInfo.workoutPlan;
+            const extraInformation = trainingInfo.extraInformation;
+            fetch(`/api/update/template/${templateNum}`, {
+                method: 'PUT',
+                headers: {
+                    'Authorization': `Bearer ${token}`,
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ workoutType, workoutPlan, extraInformation }),
+            })
+            .then(response => response.json())
+            .then(data => {
+                /* Do something */
+                console.log("A", data, "B")
+            });
+        });
+    }
 }

@@ -7,6 +7,7 @@ import bodyParser from 'body-parser';
 import logging from './config/logging';
 import config from './config/config';
 import mongoose from 'mongoose';
+import templateRoutes from './routes/template';
 import trainingRoutes from './routes/training';
 import privateExerciseRoutes from './routes/privateUserExercise';
 import globalExerciseRoutes from './routes/globalUserExercise';
@@ -64,6 +65,7 @@ router.use((req, res, next) => {
 /** Routes of our API*/
 router.use('/api', privateExerciseRoutes);
 router.use('/api', globalExerciseRoutes);
+router.use('/api', templateRoutes);
 router.use('/api', trainingRoutes);
 router.use('/api', userRoutes);
 
