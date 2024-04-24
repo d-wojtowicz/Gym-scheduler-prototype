@@ -530,8 +530,12 @@ function saveTemplate(templateNum, trainingId) {
             })
             .then(response => response.json())
             .then(data => {
-                /* Do something */
-                console.log("A", data, "B")
+                if (data.template) {
+                    window.alert(`Successfully saved this training as template ${templateNum}`);
+                }
+                if (data.message) {
+                    window.alert('Something went wrong.');
+                }
             });
         });
     }
