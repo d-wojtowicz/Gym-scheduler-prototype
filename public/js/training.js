@@ -539,4 +539,4 @@ function saveTemplate(templateNum, trainingId) {
             });
         });
     }
-}
+} 
