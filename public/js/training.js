@@ -271,7 +271,12 @@ function generateUserExerciseList(token, header, rowNumber, value) {
             const newOption = document.createElement('option');
             newOption.value = singlePrivateExercise.name;
             newOption.innerText = singlePrivateExercise.name;
-            newSelect.appendChild(newOption);
+            if (newOption.value === value) {
+                newOption.selected = true;
+                newSelect.insertBefore(newOption, newSelect.firstChild);
+            } else {
+                newSelect.appendChild(newOption);
+            }
         });
     })
     .catch(error => {
@@ -292,13 +297,22 @@ function generateUserExerciseList(token, header, rowNumber, value) {
             const newOption = document.createElement('option');
             newOption.value = singleGlobalExercise.name;
             newOption.innerText = singleGlobalExercise.name;
-            newSelect.appendChild(newOption);
+            if (newOption.value === value) {
+                newOption.selected = true;
+                newSelect.insertBefore(newOption, newSelect.firstChild);
+            } else {
+                newSelect.appendChild(newOption);
+            }
         });
+        console.log(newSelect)
     })
     .catch(error => {
         console.log("A global exercise list was not detected:\n", error)
     });
 
+    if (value) {
+        newSelect.value = "SSS";
+    }
     return newSelect;
 }
 
@@ -359,8 +373,8 @@ function fillEditTrainingModal(workoutType, workoutPlan, extraInformation) {
     document.getElementById('extraInformationEdit').value = extraInformation;
 
     const workoutPlanTable = document.getElementById('workoutPlanEdit');
+    resetWorkoutPlanTableState(workoutPlanTable);
     let numberOfRows = workoutPlanTable.getElementsByTagName('tr').length;
-
     if (numberOfRows == 1) {
         workoutPlan.forEach(singleExerciseRow => {
             const newRow = document.createElement('tr');
@@ -384,31 +398,12 @@ function fillEditTrainingModal(workoutType, workoutPlan, extraInformation) {
                 newRow.appendChild(newCell);
             });
             workoutPlanTable.appendChild(newRow);
-            fillSelectedExerciseNames(workoutPlanTable, singleExerciseRow["name"]);
             numberOfRows = workoutPlanTable.getElementsByTagName('tr').length;
         });       
     }
 }
 
-/* 
-I NEED TO REPAIR THIS ONE
-function fillSelectedExerciseNames(parent, value) {
-    const newRow = parent.lastChild;
-    const exerciseNameCell = newRow.firstChild;
-
-
-    console.log(numberOfOptions)
-    for (let i = 0; i < options.length; i++) {
-        if (options[i].innerText === value) {
-            index = i;
-            break;
-        }
-    }
-
-    if (index !== -1) {
-        newSelect.options[index].selected = true;
-        newSelect.value = value;
-    }
-
-    return newSelect;
-} */
+function resetWorkoutPlanTableState(workoutPlanTable) {
+    const rowsToReset = Array.from(workoutPlanTable.children).filter(child => child.tagName === 'TR');
+    rowsToReset.forEach(tr => workoutPlanTable.removeChild(tr));
+}
