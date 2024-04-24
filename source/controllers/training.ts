@@ -34,6 +34,33 @@ const createTraining = (req: Request, res: Response, next: NextFunction) => {
         });
 };
 
+// UPDATE
+const updateTraining = (req: Request, res: Response, next: NextFunction) => {
+    const trainingID = req.params.id;
+    const { date, workoutType, workoutPlan, extraInformation } = req.body;
+
+    const updateData = {
+        date,
+        workoutType,
+        workoutPlan,
+        extraInformation
+    };
+
+    Training.findByIdAndUpdate(trainingID, { $set: updateData }, { new: true })
+        .exec()
+        .then((result) => {
+            res.status(200).json({
+                training: result
+            });
+        })
+        .catch((error) => {
+            res.status(500).json({
+                message: error.message,
+                error
+            });
+        });
+};
+
 // GET
 const getAllTrainings = (req: Request, res: Response, next: NextFunction) => {
     const user = req.user ?? null;
@@ -94,7 +121,6 @@ const getTrainingByID = (req: Request, res: Response, next: NextFunction) => {
             });
         });
 };
-
 const getTrainingByDate = (req: Request, res: Response, next: NextFunction) => {
     const trainingsDate = req.params.date;
 
@@ -177,6 +203,7 @@ const removeTraining = (req: Request, res: Response, next: NextFunction) => {
 
 export default {
     createTraining,
+    updateTraining,
     getAllTrainings,
     getTrainingByID,
     getTrainingByDate,

@@ -14,10 +14,16 @@ document.addEventListener('DOMContentLoaded', function() {
 
     loadTrainingPanel(token);
 
-    const form = document.getElementById('createTrainingForm');
-    form.addEventListener('submit', function(event) {
+    const createForm = document.getElementById('createTrainingForm');
+    createForm.addEventListener('submit', function(event) {
         event.preventDefault();
-        addTraining(token, form);
+        addTraining(token, createForm);
+    });
+
+    const editForm = document.getElementById('editTrainingForm');
+    editForm.addEventListener('submit', function(event) {
+        event.preventDefault();
+        editTraining(token, editForm);
     });
 });
 
@@ -304,15 +310,11 @@ function generateUserExerciseList(token, header, rowNumber, value) {
                 newSelect.appendChild(newOption);
             }
         });
-        console.log(newSelect)
     })
     .catch(error => {
         console.log("A global exercise list was not detected:\n", error)
     });
 
-    if (value) {
-        newSelect.value = "SSS";
-    }
     return newSelect;
 }
 
@@ -350,7 +352,7 @@ function toggleEditTrainingModal(modalSwitch, trainingId) {
             const workoutType = trainingInfo.workoutType;
             const workoutPlan = trainingInfo.workoutPlan;
             const extraInformation = trainingInfo.extraInformation;
-            fillEditTrainingModal(workoutType, workoutPlan, extraInformation);
+            fillEditTrainingModal(trainingId, workoutType, workoutPlan, extraInformation);
         });
     }
     if (modalSwitch) {
@@ -362,7 +364,7 @@ function toggleEditTrainingModal(modalSwitch, trainingId) {
     }
 }
 
-function fillEditTrainingModal(workoutType, workoutPlan, extraInformation) {
+function fillEditTrainingModal(trainingId, workoutType, workoutPlan, extraInformation) {
     const token = localStorage.getItem('token');
     if (!token) {
         window.location.href = '/';
@@ -374,6 +376,9 @@ function fillEditTrainingModal(workoutType, workoutPlan, extraInformation) {
 
     const workoutPlanTable = document.getElementById('workoutPlanEdit');
     resetWorkoutPlanTableState(workoutPlanTable);
+    const containerId = workoutPlanTable.getElementsByTagName('tbody')[0]
+    containerId.setAttribute('id', trainingId)
+
     let numberOfRows = workoutPlanTable.getElementsByTagName('tr').length;
     if (numberOfRows == 1) {
         workoutPlan.forEach(singleExerciseRow => {
@@ -406,4 +411,75 @@ function fillEditTrainingModal(workoutType, workoutPlan, extraInformation) {
 function resetWorkoutPlanTableState(workoutPlanTable) {
     const rowsToReset = Array.from(workoutPlanTable.children).filter(child => child.tagName === 'TR');
     rowsToReset.forEach(tr => workoutPlanTable.removeChild(tr));
+}
+
+function editTraining() {
+    const token = localStorage.getItem('token');
+    if (!token) {
+        window.location.href = '/';
+        return;
+    }
+
+    // Assigning the form data
+    const editForm = document.getElementById('editTrainingForm');
+    const formData = new FormData(editForm);
+    const data = {}
+    formData.forEach((value, key) => {
+        data[key.replace('Edit','')] = value;
+    });
+
+    // Fill the workoutPlan from the form data
+    const groupedData = {};
+    Object.keys(workoutPlanTableHeaders).forEach(headerKey => {
+        const dataKeys = Object.keys(data);
+        dataKeys.forEach(dataKey => {
+            if (dataKey.startsWith(headerKey)) {
+                const suffix = dataKey.split('-')[1]; // Suffix (number)
+                if (!groupedData[suffix]) {
+                    groupedData[suffix] = {};
+                }
+                let value = data[dataKey];
+                if (headerKey === 'weightLoad' || headerKey === 'sets' || headerKey === 'repetitions') {
+                    value = parseInt(value, 10);
+                }
+                groupedData[suffix][headerKey] = value;
+            }
+        });
+    });
+    
+    // Extract obligatory data
+    const workoutPlanEdit = document.getElementById('workoutPlanEdit');
+    const containerId = workoutPlanEdit.getElementsByTagName('tbody')[0];
+    
+    const id = containerId.getAttribute('id');
+    const date = document.getElementById('training-date').innerText;
+    const workoutType = data.workoutType;
+    const workoutPlan = Object.values(groupedData);
+    const extraInformation = data.extraInformation;
+
+    // Inject data
+    fetch(`/api/update/training/${id}`, {
+        method: 'PUT',
+        headers: {
+            'Authorization': `Bearer ${token}`,
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({date, workoutType, workoutPlan, extraInformation})
+    })
+    .then(response => response.json())
+    .then(data => {
+        // If training is updated (successful)
+        if (data.training) {
+            console.log('Training update saved successfully');
+            document.getElementById('main-training').innerHTML = "";
+            toggleEditTrainingModal(false);
+            loadTrainingPanel(token);
+        }
+        if (data.message) {
+            console.log(data.message)
+        }
+    })
+    .catch(error => {
+        console.log(error.message)
+    });
 }
