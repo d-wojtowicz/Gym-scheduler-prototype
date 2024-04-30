@@ -12,23 +12,13 @@
             <img src="images/calendar.png" onClick="myDashboard()">
             <img src="images/user.png" onClick="myAccount()">
         </div>
-        <div id="main-controller">
-            <h1>Gym calendar</h1>
-            <button id="left-button" class="button" onClick="generateMonthPage('previous')"><</button>
-            <h2 id='month'>
-                <!-- Filled by dashboard.js -->
-            </h2>
-            <button id="right-button" class="button" onClick="generateMonthPage('next')">></button>
-        </div>
-        <div id="main-calendar">
-            <table id="main-calendar-month">
-                <!-- Filled by dashboard.js -->
-            </table>
+        <div id="main-user-info" class="scrollable-container">
+            <h1>My account</h1>
         </div>
         <div id="main-footer">
             
         </div>
-        <script src="js/dashboard.js"></script>
+        <script src="js/user.js"></script>
         <script src="js/utils.js"></script>
     </body>
 </html>

@@ -12,7 +12,8 @@
     <body>
         <div id="main-menu">
             <img src="../images/logout.png" onClick="signOut()">
-            <img src="../images/user.png">
+            <img src="../images/calendar.png" onClick="myDashboard()">
+            <img src="../images/user.png" onClick="myAccount()">
         </div>
         <div id="main-container">
             <div id="main-controller">
@@ -23,11 +24,11 @@
                 </h1>
                 <button id="right-button" class="button" onClick="toggleCreateTrainingModal(true)">+</button>
             </div>
-            <div id="main-training">
+            <div id="main-training" class="scrollable-container">
                 <!-- Filled by training.js -->
             </div>
         </div>
-        <div id="create-training-modal">
+        <div id="create-training-modal" class="scrollable-container">
             <h1>Create training</h1>
             <!-- workoutType workoutPlan (type, weight_load, sets, repetitions, extraInformation) -->
             <form id="createTrainingForm">
@@ -51,7 +52,7 @@
                 <button class="button" onClick="toggleCreateTrainingModal(false)" type="button">Close</button>
             </form>
         </div>
-        <div id="edit-training-modal">
+        <div id="edit-training-modal" class="scrollable-container">
             <h1>Edit training</h1>
             <form id="editTrainingForm">
                 <label for="workoutTypeEdit">Workout type:</label><br>

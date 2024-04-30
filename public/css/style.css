@@ -287,15 +287,15 @@ body{
     transform: translate(-50%, -50%);
 }
 
-#main-training::-webkit-scrollbar, #create-training-modal::-webkit-scrollbar, #edit-training-modal::-webkit-scrollbar{
+.scrollable-container::-webkit-scrollbar{
     background-color: var(--mainThemeHover);
 }
 
-#main-training::-webkit-scrollbar, #create-training-modal::-webkit-scrollbar-button, #edit-training-modal::-webkit-scrollbar-button{
+.scrollable-container::-webkit-scrollbar-button{
     background-color: var(--mainTheme);
 }
 
-#main-training::-webkit-scrollbar, #create-training-modal::-webkit-scrollbar-thumb, #edit-training-modal::-webkit-scrollbar-thumb{
+.scrollable-container::-webkit-scrollbar-thumb{
     background-color: var(--mainTheme);
 }
 
@@ -349,4 +349,23 @@ body{
     background-color: var(--mainTheme);
     font-weight: bold;
     color: white;
+}
+
+
+
+/* User page */
+#main-user-info{
+    overflow-y: scroll;
+    width: 50vw;
+    height: 60vh;
+    padding: 3vw 3vh 3vw 3vh;
+
+    color: var(--fontColor);
+    background-color: var(--secondaryTheme);
+    text-align: center;
+
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }

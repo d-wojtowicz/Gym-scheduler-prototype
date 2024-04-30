@@ -75,6 +75,7 @@ router.get('/login', (req, res) => res.render('pages/login'));
 router.get('/register', (req, res) => res.render('pages/register'));
 router.get('/dashboard', (req, res) => res.render('pages/dashboard'));
 router.get('/dashboard/:date', (req, res) => res.render('pages/training', { trainingDate: req.params.date }));
+router.get('/user', (req, res) => res.render('pages/user'));
 
 /** Create the server */
 const httpServer = http.createServer(router);
