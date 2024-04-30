@@ -10,6 +10,10 @@
         </title>
     </head>
     <body>
+        <div id="main-menu">
+            <img src="../images/logout.png" onClick="signOut()">
+            <img src="../images/user.png">
+        </div>
         <div id="main-container">
             <div id="main-controller">
                 <button id="left-button" class="button" onClick="location.href='/dashboard'">Back</button>
@@ -70,6 +74,10 @@
                 <button class="button" onClick="toggleEditTrainingModal(false)" type="button">Close</button>
             </form>
         </div>
+        <div id="main-footer">
+            
+        </div>
         <script src="../js/training.js"></script>
+        <script src="../js/utils.js"></script>
     </body>
 </html>

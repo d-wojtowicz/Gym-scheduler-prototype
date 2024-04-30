@@ -6,6 +6,35 @@ body{
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', 'Arial';
 }
 
+#main-menu {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 10vh;
+    background-color: var(--secondaryTheme);
+}
+
+#main-menu img {
+    cursor: pointer;
+    margin: 2vh 1vw 2vh 0vw;
+    height: 6vh;
+    float: right;
+}
+
+#main-menu img:hover {
+    background-color: var(--secondaryThemeHover);
+}
+
+#main-footer {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 7.5%;
+    background-color: var(--secondaryTheme);
+}
+
 :root {
     /* --mainTheme: rgb(0, 38, 48); */
     --mainTheme: rgb(40, 0, 0);
@@ -14,6 +43,8 @@ body{
     --secondaryThemeHover: rgb(90, 0, 0);
     --fontColor: white;
 }
+
+
 
 /* Login & Register page */
 #loginPage .container, #registerPage .container{
@@ -107,7 +138,7 @@ body{
     background-color: var(--mainTheme);
 
     position: absolute;
-    top: 10%;
+    top: 20%;
     left: 50%;
     transform: translate(-50%, -50%);
 }
@@ -143,7 +174,7 @@ body{
     background-color: var(--mainTheme);
 
     position: absolute;
-    top: 50%;
+    top: 60%;
     left: 50%;
     transform: translate(-50%, -50%);
 }
@@ -243,7 +274,7 @@ body{
     overflow-y: scroll;
     display: none;
     width: 50vw;
-    height: 70vh;
+    height: 60vh;
     padding: 3vw 3vh 3vw 3vh;
 
     color: var(--fontColor);
