@@ -1,6 +1,7 @@
 // Token reset
 if (localStorage.getItem('token')) {
     localStorage.removeItem('token');
+    localStorage.removeItem('actualPageDate');
 }
 
 // If redirected from 'register' panel by created account

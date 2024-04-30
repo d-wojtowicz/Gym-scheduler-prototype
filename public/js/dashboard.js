@@ -14,13 +14,46 @@ document.addEventListener('DOMContentLoaded', function() {
     })
     .then(response => response.json())
     .then(data => {
-        // TODO: Use data to color specific fields with created trainings 
-        // TODO: Adjust the dependence of dates on scrolling calendar pages rather than the current month
-        const specifiedMonth = new Date();
+        let actualDate = localStorage.getItem("actualPageDate");
+        if (!actualDate) {
+            localStorage.setItem("actualPageDate", new Date())
+        }
+        const specifiedMonth = new Date(localStorage.getItem('actualPageDate'));
         generateDateTitle(specifiedMonth);
         generateCalendar(specifiedMonth, 'main-calendar-month', data);
     });
 });
+
+function generateMonthPage(page){
+    const token = localStorage.getItem('token');
+    if (!token) {
+        window.location.href = '/';
+        return;
+    }
+    
+    let specifiedMonth = new Date(localStorage.getItem('actualPageDate'));
+    specifiedMonth.setDate(1);
+    
+    if (page === 'previous') {
+        specifiedMonth.setMonth(specifiedMonth.getMonth() - 1);
+    } else if (page === 'next') {
+        specifiedMonth.setMonth(specifiedMonth.getMonth() + 1);
+    }
+    
+    fetch('/api/get/trainings', {
+        method: 'GET',
+        headers: {
+            'Authorization': `Bearer ${token}`,
+            'Content-Type': 'application/json',
+        },
+    })
+    .then(response => response.json())
+    .then(data => {
+        localStorage.setItem("actualPageDate", specifiedMonth);
+        generateDateTitle(specifiedMonth);
+        generateCalendar(specifiedMonth, 'main-calendar-month', data);
+    });
+}
 
 function generateDateTitle(specifiedMonth){
     const monthsList = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];

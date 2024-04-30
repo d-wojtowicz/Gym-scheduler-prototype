@@ -9,11 +9,11 @@
     <body>
         <div id="main-controller">
             <h1>Gym calendar</h1>
-            <button id="left-button" class="button"><</button>
+            <button id="left-button" class="button" onClick="generateMonthPage('previous')"><</button>
             <h2 id='month'>
                 <!-- Filled by dashboard.js -->
             </h2>
-            <button id="right-button" class="button">></button>
+            <button id="right-button" class="button" onClick="generateMonthPage('next')">></button>
         </div>
         <div id="main-calendar">
             <table id="main-calendar-month">

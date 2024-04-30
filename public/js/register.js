@@ -1,6 +1,7 @@
 // Token reset
 if (localStorage.getItem('token')) {
     localStorage.removeItem('token');
+    localStorage.removeItem('actualPageDate');
 }
 
 document.getElementById('registerForm').addEventListener('submit', function(e){
