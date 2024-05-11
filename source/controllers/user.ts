@@ -108,17 +108,19 @@ const getAllUsers = (req: Request, res: Response, next: NextFunction) => {
         });
 };
 const getUserByID = (req: Request, res: Response, next: NextFunction) => {
-    const userID = req.params._id as string;
+    const user = req.user ?? null;
+    let query = {};
 
-    if (!userID) {
-        return res.status(400).json({
-            message: 'No date provided.'
+    if (user) {
+        const id = user.userId as string;
+        query = { _id: { $eq: id } };
+    } else {
+        return res.status(500).json({
+            message: 'The token was not found.'
         });
     }
 
-    User.find({
-        _id: { $eq: userID }
-    })
+    User.find({ query })
         .exec()
         .then((result) => {
             return res.status(200).json({
