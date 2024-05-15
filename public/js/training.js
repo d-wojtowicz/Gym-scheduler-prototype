@@ -285,17 +285,19 @@ function generateUserExerciseList(token, header, rowNumber, value) {
     })
     .then(response => response.json())
     .then(privateList => {
-        privateList.privateExercise.forEach(singlePrivateExercise => {
-            const newOption = document.createElement('option');
-            newOption.value = singlePrivateExercise.name;
-            newOption.innerText = singlePrivateExercise.name;
-            if (newOption.value === value) {
-                newOption.selected = true;
-                newSelect.insertBefore(newOption, newSelect.firstChild);
-            } else {
-                newSelect.appendChild(newOption);
-            }
-        });
+        if (privateList.privateExercise) {
+            privateList.privateExercise.forEach(singlePrivateExercise => {
+                const newOption = document.createElement('option');
+                newOption.value = singlePrivateExercise.name;
+                newOption.innerText = singlePrivateExercise.name;
+                if (newOption.value === value) {
+                    newOption.selected = true;
+                    newSelect.insertBefore(newOption, newSelect.firstChild);
+                } else {
+                    newSelect.appendChild(newOption);
+                }
+            });
+        }
     })
     .catch(error => {
         console.log("A private exercise list was not detected:\n", error)
@@ -499,6 +501,63 @@ function editTraining() {
 
 
 /* TEMPLATES */
+function loadTemplate(templateNum) {
+    const token = localStorage.getItem('token');
+    if (!token) {
+        window.location.href = '/';
+        return;
+    }
+
+    fetch(`/api/get/template/${templateNum}`, {
+        method: 'GET',
+        headers: {
+            'Authorization': `Bearer ${token}`,
+            'Content-Type': 'application/json',
+        },
+    })
+    .then(response => response.json())
+    .then(data => {
+        const template = data.template[`template${templateNum}`];
+        
+        const workoutType = template.workoutType;
+        const workoutPlan = template.workoutPlan;
+        const extraInformation = template.extraInformation;
+
+        document.getElementById('workoutType').value = workoutType;
+        document.getElementById('extraInformation').value = extraInformation;
+
+        const workoutPlanTable = document.getElementById('workoutPlan');
+        resetWorkoutPlanTableState(workoutPlanTable);
+        let numberOfRows = workoutPlanTable.getElementsByTagName('tr').length;
+        if (numberOfRows == 1) {
+            workoutPlan.forEach(singleExerciseRow => {
+                const newRow = document.createElement('tr');
+                Object.keys(workoutPlanTableHeaders).forEach(header => {
+                    const newCell = document.createElement('td');
+                    let newInput = "";
+
+                    if (header == "name") {
+                        newInput = generateUserExerciseList(token, header, numberOfRows-1, singleExerciseRow[header]);
+                    } else {
+                        newInput = document.createElement('input');
+
+                        newInput.setAttribute('type', 'text');
+                        newInput.setAttribute('name', header + "-" + String(numberOfRows-1));
+                        newInput.setAttribute('required', true);
+                        newInput.setAttribute('value', singleExerciseRow[header]);
+                        newInput.setAttribute('id', workoutPlanTableHeaders[header] + "_" + String(numberOfRows));
+                        newInput.setAttribute('list', 'exercises-list');
+                    }
+                    newCell.appendChild(newInput);
+                    newRow.appendChild(newCell);
+                });
+                workoutPlanTable.appendChild(newRow);
+                numberOfRows = workoutPlanTable.getElementsByTagName('tr').length;
+            });       
+        }
+    });
+}
+
 function saveTemplate(templateNum, trainingId) {
     if (trainingId) {
         const token = localStorage.getItem('token');
