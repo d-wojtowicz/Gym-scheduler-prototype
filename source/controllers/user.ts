@@ -109,18 +109,16 @@ const getAllUsers = (req: Request, res: Response, next: NextFunction) => {
 };
 const getUserByID = (req: Request, res: Response, next: NextFunction) => {
     const user = req.user ?? null;
-    let query = {};
+    let userId = '';
 
     if (user) {
-        const id = user.userId as string;
-        query = { _id: { $eq: id } };
+        userId = user.userId as string;
     } else {
         return res.status(500).json({
             message: 'The token was not found.'
         });
     }
-
-    User.find({ query })
+    User.findOne({ _id: userId }, 'age weight height')
         .exec()
         .then((result) => {
             return res.status(200).json({

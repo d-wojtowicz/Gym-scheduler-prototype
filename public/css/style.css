@@ -369,3 +369,19 @@ body{
     left: 50%;
     transform: translate(-50%, -50%);
 }
+
+#userInfo{
+    width: 20vw;
+    height: 10vh;
+    text-align: center;
+    border-collapse: collapse;
+    border: 1px solid white;
+    
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%,  0%);
+}
+
+#userInfo td, #userInfo th{
+    border: 1px solid white;
+}
