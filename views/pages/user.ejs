@@ -14,18 +14,38 @@
         </div>
         <div id="main-user-info" class="scrollable-container">
             <h1>My account</h1>
-            <table id="userInfo">
-                <tr>
-                    <th>Age</th>
-                    <th>Weight [kg]</th>
-                    <th>Height [cm]</th>
-                </tr>
-                <tr>
-                    <td id="userAge"></td>
-                    <td id="userWeight"></td>
-                    <td id="userHeight"></td>
-                </tr>
-            </table>
+            <div class="center">
+                <h3>General info</h3>
+                <table id="userInfo">
+                    <tr>
+                        <th>Age</th>
+                        <th>Weight [kg]</th>
+                        <th>Height [cm]</th>
+                    </tr>
+                    <tr>
+                        <td id="userAge"></td>
+                        <td id="userWeight"></td>
+                        <td id="userHeight"></td>
+                    </tr>
+                </table>
+                <h3>Private exercises</h3>
+                <table id="userPrivateExercise">
+                    <tr>
+                        <td><input type="text" placeholder="Input exercise name" id="privateExerciseName"></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <button class="button" onClick="addPrivateExercise()">Add</button>
+                            <button class="button" onClick="delPrivateExercise()">Delete</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td id="privateExercises">
+                            <!-- Filled with user.js -->
+                        </td>
+                    </tr>
+                </table>
+            </div>
         </div>
         <div id="main-footer">
             

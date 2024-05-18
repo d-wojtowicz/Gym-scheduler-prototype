@@ -4,10 +4,19 @@ import privateUserExercise from '../models/privateUserExercise';
 
 // PATCH
 const addCustomExercise = (req: Request, res: Response, next: NextFunction) => {
-    let { userId, customExercises } = req.body;
+    const user = req.user ?? null;
+    let id = '';
+    let customExercises = req.body.customExercises;
 
+    if (user) {
+        id = user.userId as string;
+    } else {
+        return res.status(500).json({
+            message: 'The token was not found.'
+        });
+    }
     privateUserExercise
-        .updateOne({ userId: userId }, { $push: { customExercises: { $each: customExercises } } }, { upsert: true })
+        .updateOne({ userId: id }, { $push: { customExercises: { $each: customExercises } } }, { upsert: true })
         .then((result) => {
             if (result.matchedCount === 0) {
                 return res.status(404).json({

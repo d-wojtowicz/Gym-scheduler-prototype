@@ -9,6 +9,6 @@ router.get('/get/privateExercise', verifyToken, controller.getAllPrivateExercise
 
 router.post('/create/privateExercise', controller.createPrivateExercise);
 
-router.patch('/patch/privateExercise', controller.addCustomExercise);
+router.put('/patch/privateExercise', verifyToken, controller.addCustomExercise);
 
 export = router;
