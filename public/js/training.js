@@ -286,7 +286,7 @@ function generateUserExerciseList(token, header, rowNumber, value) {
     .then(response => response.json())
     .then(privateList => {
         if (privateList.privateExercise) {
-            privateList.privateExercise.forEach(singlePrivateExercise => {
+            privateList.privateExercise.customExercises.forEach(singlePrivateExercise => {
                 const newOption = document.createElement('option');
                 newOption.value = singlePrivateExercise.name;
                 newOption.innerText = singlePrivateExercise.name;
