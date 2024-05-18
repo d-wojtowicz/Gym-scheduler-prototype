@@ -66,7 +66,7 @@ const getAllPrivateExercises = (req: Request, res: Response, next: NextFunction)
     }
 
     privateUserExercise
-        .find(query)
+        .findOne(query)
         .exec()
         .then((results) => {
             return res.status(200).json({
