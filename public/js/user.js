@@ -52,10 +52,8 @@ function loadPrivateExercises(token) {
     })
     .then(response => response.json())
     .then(privateList => {
-        console.log(privateList)
         if (privateList.privateExercise) {
             privateList.privateExercise.customExercises.forEach(singlePrivateExercise => {
-                console.log(singlePrivateExercise);
                 const newOption = document.createElement('option');
                 newOption.value = singlePrivateExercise.name;
                 newOption.innerText = singlePrivateExercise.name;
@@ -94,6 +92,35 @@ function addPrivateExercise() {
         })
         .catch(error => {
             console.log(error.message)
+        });
+    }
+}
+
+function delPrivateExercise() {
+    const token = localStorage.getItem('token');
+    if (!token) {
+        window.location.href = '/';
+        return;
+    }
+
+    const privateExerciseName = document.getElementById('privateExerciseName').value;
+    if (privateExerciseName) {
+        const customExerciseNames = privateExerciseName;
+        fetch('/api/delete/privateExercise', {
+            method: 'DELETE',
+            headers: {
+                'Authorization': `Bearer ${token}`,
+                'Content-type': 'application/json'
+            },
+            body: JSON.stringify({ customExerciseNames })
+        })
+        .then(response => response.json())
+        .then(data => {
+            console.log(data.message);
+            loadPrivateExercises(token);
+        })
+        .catch(error => {
+            console.log(error.message);
         });
     }
 }
