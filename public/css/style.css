@@ -299,7 +299,7 @@ body{
     background-color: var(--mainTheme);
 }
 
-#create-training-modal .button, #main-training .button, #edit-training-modal .button, #userPrivateExercise .button {
+#create-training-modal .button, #main-training .button, #edit-training-modal .button, #userPrivateExercise .button, #userMeasurements .button{
     width: 10vw;
     height: 5vh;
 
@@ -309,7 +309,7 @@ body{
     color: var(--fontColor);
 }
 
-#create-training-modal .button:hover, #main-training .button:hover, #edit-training-modal .button:hover, #userPrivateExercise .button:hover {
+#create-training-modal .button:hover, #main-training .button:hover, #edit-training-modal .button:hover, #userPrivateExercise .button:hover, #userMeasurements .button:hover {
     cursor: pointer;
     background-color: var(--mainThemeHover);
 }
@@ -356,7 +356,7 @@ body{
 /* User page */
 #main-user-info{
     overflow-y: scroll;
-    width: 50vw;
+    width: 60vw;
     height: 60vh;
     padding: 3vw 3vh 3vw 3vh;
 
@@ -383,9 +383,29 @@ body{
     border: 1px solid white;
 }
 
+#userPrivateExercise {
+    margin-bottom: 5vh;
+}
+
 .center {
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
+}
+
+.inputTable input{
+    width: 5vw;
+
+    font-weight: bold;
+    text-align: center;
+    color: var(--fontColor);
+    padding: 1vh 0 1vh 0;
+    border: 0px;
+    border-radius: 1vw; 
+    background-color: var(--mainTheme);
+}
+
+#measurement-date{
+    width: 8vw;
 }
