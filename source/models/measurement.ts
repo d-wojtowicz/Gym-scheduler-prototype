@@ -9,7 +9,7 @@ const MeasurementRowSchema: Schema = new Schema({
     stomach: { type: Number },
     muffin_top: { type: Number },
     biceps_l: { type: Number },
-    biceps_p: { type: Number },
+    biceps_r: { type: Number },
     thigh: { type: Number },
     calf: { type: Number }
 });

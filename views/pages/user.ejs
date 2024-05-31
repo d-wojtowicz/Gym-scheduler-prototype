@@ -59,22 +59,30 @@
                         <th>Thigh [cm]</th>
                         <th>Calf [cm]</th>
                     </tr>
+                    <tr>
+                        <td>
+                            <table id="savedUserMeasurements">
+                                <tr>
+                                    <!-- Filled with user.js -->
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
                     <tr class="inputTable">
                         <td><input type="date" name="measurement-date" id="measurement-date"></td>
-                        <td><input type="number" name="weight" min="0" max="200"></td>
-                        <td><input type="number" name="chest" min="0" max="150"></td>
-                        <td><input type="number" name="waist" min="0" max="150"></td>
-                        <td><input type="number" name="stomach" min="0" max="150"></td>
-                        <td><input type="number" name="muffin-top" min="0" max="150"></td>
-                        <td><input type="number" name="biceps-L" min="0" max="60"></td>
-                        <td><input type="number" name="biceps-P" min="0" max="60"></td>
-                        <td><input type="number" name="thigh" min="0" max="100"></td>
-                        <td><input type="number" name="calf" min="0" max="60"></td>
+                        <td><input type="number" name="weight" id="weight" min="0" max="200"></td>
+                        <td><input type="number" name="chest" id="chest" min="0" max="150"></td>
+                        <td><input type="number" name="waist" id="waist" min="0" max="150"></td>
+                        <td><input type="number" name="stomach" id="stomach" min="0" max="150"></td>
+                        <td><input type="number" name="muffin-top" id="muffin-top" min="0" max="150"></td>
+                        <td><input type="number" name="biceps-L" id="biceps-L" min="0" max="60"></td>
+                        <td><input type="number" name="biceps-R" id="biceps-R" min="0" max="60"></td>
+                        <td><input type="number" name="thigh" id="thigh" min="0" max="100"></td>
+                        <td><input type="number" name="calf" id="calf" min="0" max="60"></td>
                     </tr>
                     <tr>
-                        <td colspan="100%"><button class="button" onClick="addMeasurement" type="button">+</button></td>
+                        <td colspan="100%"><button class="button" onClick="addMeasurement()" type="button">+</button></td>
                     </tr>
-                    <!-- Filled with user.js -->
                 </table>
             </div>
         </div>

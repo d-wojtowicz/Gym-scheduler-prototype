@@ -6,6 +6,6 @@ const router = express.Router();
 
 router.get('/get/measurements', verifyToken, controller.getAllMeasurements);
 
-router.post('/create/measurement', verifyToken, controller.addMeasurement);
+router.put('/patch/measurement', verifyToken, controller.addMeasurement);
 
 export = router;

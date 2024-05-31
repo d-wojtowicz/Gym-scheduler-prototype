@@ -8,7 +8,7 @@ interface IMeasurementRow {
     stomach?: number;
     muffin_top?: number;
     biceps_l?: number;
-    biceps_p?: number;
+    biceps_r?: number;
     thigh?: number;
     calf?: number;
 }
