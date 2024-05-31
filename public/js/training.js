@@ -286,7 +286,11 @@ function generateUserExerciseList(token, header, rowNumber, value) {
     .then(response => response.json())
     .then(privateList => {
         if (privateList.privateExercise) {
-            privateList.privateExercise.customExercises.forEach(singlePrivateExercise => {
+            const sortedExercises = [...privateList.privateExercise.customExercises].sort((a, b) => {
+                return a.name.localeCompare(b.name);
+            });
+
+            sortedExercises.forEach(singlePrivateExercise => {
                 const newOption = document.createElement('option');
                 newOption.value = singlePrivateExercise.name;
                 newOption.innerText = singlePrivateExercise.name;
@@ -313,7 +317,11 @@ function generateUserExerciseList(token, header, rowNumber, value) {
     })
     .then(response => response.json())
     .then(globalList => {
-        globalList.globalExercise.forEach(singleGlobalExercise => {
+        const sortedExercises = [...globalList.globalExercise].sort((a, b) => {
+            return a.name.localeCompare(b.name);
+        });
+
+        sortedExercises.forEach(singleGlobalExercise => {
             const newOption = document.createElement('option');
             newOption.value = singleGlobalExercise.name;
             newOption.innerText = singleGlobalExercise.name;
