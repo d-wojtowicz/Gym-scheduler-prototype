@@ -3,7 +3,33 @@ import measurement from '../models/measurement';
 import { json } from 'body-parser';
 
 // GET
-const getAllMeasurements = (req: Request, res: Response, next: NextFunction) => {};
+const getAllMeasurements = (req: Request, res: Response, next: NextFunction) => {
+    const user = req.user ?? null;
+    let id = '';
+
+    if (user) {
+        id = user.userId as string;
+    } else {
+        return res.status(500).json({
+            message: 'The token was not found.'
+        });
+    }
+
+    measurement
+        .find({ userId: id })
+        .exec()
+        .then((results) => {
+            return res.status(200).json({
+                measurements: results
+            });
+        })
+        .catch((error) => {
+            return res.status(500).json({
+                message: error.message,
+                error
+            });
+        });
+};
 
 // PUT
 const addMeasurement = (req: Request, res: Response, next: NextFunction) => {

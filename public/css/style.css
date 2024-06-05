@@ -335,7 +335,7 @@ body{
     background-color: var(--mainTheme);
 }
 
-#createTrainingForm td, #createTrainingForm th, #createTrainingForm input, #editTrainingForm td, #editTrainingForm th, #editTrainingForm input, #userPrivateExercise td, #userPrivateExercise input{
+#createTrainingForm td, #createTrainingForm th, #createTrainingForm input, #editTrainingForm td, #editTrainingForm th, #editTrainingForm input, #userPrivateExercise td, #userPrivateExercise input, #userMeasurements td{
     text-align: center;
     color: var(--fontColor);
     padding: 1vh 0 1vh 0;

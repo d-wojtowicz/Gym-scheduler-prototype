@@ -136,7 +136,21 @@ function loadMeasurements(token) {
     })
     .then(response => response.json())
     .then(data => {
-        console.log("LOADING MEASUREMENTS: ", data)
+        if (data.measurements) {
+            const measurementsTable = document.getElementById('userMeasurements');
+            data.measurements[0].measurements.forEach(measurementRow => {
+                const newMeasurementRow = document.createElement('tr');
+                const { _id, ...sanitizedRow } = measurementRow;
+                sanitizedRow.date = customizeDateFormat(sanitizedRow.date);
+
+                Object.values(sanitizedRow).forEach(singleMeasurement => {
+                    const newMeasurementValue = document.createElement('td');
+                    newMeasurementValue.innerText = singleMeasurement;
+                    newMeasurementRow.appendChild(newMeasurementValue);
+                });
+                measurementsTable.appendChild(newMeasurementRow);
+            });
+        }
     })
     .catch(error => {
         console.log("A measurements list was not detected:\n", error)
@@ -184,11 +198,29 @@ function addMeasurement() {
         })
         .then(response => response.json())
         .then(data => {
-            console.log(data);
-            loadMeasurements(token);
+            const measurementsTable = document.getElementById('userMeasurements');
+            const newMeasurementRow = document.createElement('tr');
+            
+            Object.values(measurements[0]).forEach(singleMeasurement => {
+                const newMeasurementValue = document.createElement('td');
+                newMeasurementValue.innerText = singleMeasurement;
+                newMeasurementRow.appendChild(newMeasurementValue);
+            });
+
+            measurementsTable.appendChild(newMeasurementRow);
         })
         .catch(error => {
             console.log(error.message);
         });
     }
+}
+
+function customizeDateFormat(date) {
+    const fullDate = new Date(date);
+
+    const year = fullDate.getFullYear();
+    const month  = String(fullDate.getMonth() + 1).padStart(2, '0');
+    const day = String(fullDate.getDate()).padStart(2, '0');
+
+    return `${year}-${month}-${day}`;
 }
