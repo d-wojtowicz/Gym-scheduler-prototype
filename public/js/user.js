@@ -138,7 +138,15 @@ function loadMeasurements(token) {
     .then(data => {
         if (data.measurements) {
             const measurementsTable = document.getElementById('userMeasurements');
-            data.measurements[0].measurements.forEach(measurementRow => {
+
+            const measurements = data.measurements[0].measurements;
+            measurements.sort((a, b) => {
+                const dateA = new Date(a.date);
+                const dateB = new Date(b.date);
+                return dateB.getTime() - dateA.getTime();
+            })
+            
+            measurements.forEach(measurementRow => {
                 const newMeasurementRow = document.createElement('tr');
                 const { _id, ...sanitizedRow } = measurementRow;
                 sanitizedRow.date = customizeDateFormat(sanitizedRow.date);
