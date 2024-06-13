@@ -82,7 +82,11 @@ function generateCalendar(specifiedMonth, containerId, data) {
     const daysHeader = document.createElement('tr');
     daysOfWeek.forEach(day => {
         const header = document.createElement('th');
-        header.innerText = day;
+        const headerValue = document.createElement('p');
+
+        headerValue.innerText = day;
+
+        header.appendChild(headerValue);
         daysHeader.appendChild(header);
     });
     calendarContainer.appendChild(daysHeader);

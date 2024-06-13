@@ -409,3 +409,96 @@ body{
 #measurement-date{
     width: 8vw;
 }
+
+
+
+
+/* Responsiveness */
+@media (max-width: 800px) {
+    #loginPage .container, #registerPage .container{
+        width: 90vw;
+        top: 50%;
+    }
+    #loginForm input, #registerPage input{
+        width: 50vw;
+        height: 4vh;
+    }
+    #loginForm button, #registerForm button{
+        width: 30vw;
+        height: 5vh;
+        border-radius: 3vw;
+    }
+
+    #main-controller {
+        width: 100vw;
+        max-height: 20vh;
+    }
+    #main-controller .button{
+        width: 15vw;
+    }
+    #main-calendar, #main-training{
+        width: 100vw;
+        height: 60vh;
+    }
+    #main-calendar-month{
+        width: 96vw;
+        height: 54vh;
+        margin: 3vh 2vw 3vh 2vw;
+    }
+    #main-calendar-month th p{
+        font-size: 13px;
+        transform: rotate(45deg);
+    }
+
+    #create-training-modal .button, #main-training .button, #edit-training-modal .button, #userPrivateExercise .button, #userMeasurements .button{
+        width: 20vw;
+        height: 5vh;
+    }
+    .single-training table{
+        width: 96vw;
+        height: 54vh;
+        margin: 3vh 2vw 3vh 2vw;
+    }
+    .single-training table th, .single-training table td{
+        font-size: 18px;
+        border-radius: 1.5vw;
+    }
+
+    #create-training-modal, #edit-training-modal{
+        width: 70vw;
+        height: 60vh;
+        padding: 3vw 3vh 3vw 3vh;
+    }
+    #workoutPlan, #workoutPlanEdit{
+        width: 55vw; /* TODO: CORRECT THIS */
+    }
+    #workoutPlan td, #workoutPlanEdit td{
+        width: 2vw; /* TODO: CORRECT THIS */
+    }
+    #createTrainingForm textarea, #editTrainingForm textarea{
+        width: 60vw;
+    }
+    #createTrainingForm td, #createTrainingForm table th, #createTrainingForm input, #editTrainingForm td, #editTrainingForm th, #editTrainingForm input, #userPrivateExercise td, #userPrivateExercise input, #userMeasurements td{
+        padding: 1vh 0 1vh 0;
+        width: 25vw; /* TODO: CORRECT THIS */
+        border-radius: 1vw; 
+    }
+    
+
+    #main-user-info{
+        width: 90vw;
+        height: 65vh;
+    }
+    #userInfo{
+        width: 50vw;
+    }
+    #userPrivateExercise{
+        width: 60vw;
+    }
+    #userPrivateExercise input{
+        width: 50vw;
+    }
+    #userMeasurements{
+        width: 3vw;
+    }
+}
