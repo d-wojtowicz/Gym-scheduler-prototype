@@ -470,18 +470,18 @@ body{
         padding: 3vw 3vh 3vw 3vh;
     }
     #workoutPlan, #workoutPlanEdit{
-        width: 55vw; /* TODO: CORRECT THIS */
-    }
-    #workoutPlan td, #workoutPlanEdit td{
-        width: 2vw; /* TODO: CORRECT THIS */
+        width: 60vw;
     }
     #createTrainingForm textarea, #editTrainingForm textarea{
         width: 60vw;
     }
     #createTrainingForm td, #createTrainingForm table th, #createTrainingForm input, #editTrainingForm td, #editTrainingForm th, #editTrainingForm input, #userPrivateExercise td, #userPrivateExercise input, #userMeasurements td{
         padding: 1vh 0 1vh 0;
-        width: 25vw; /* TODO: CORRECT THIS */
+        width: 15vw;
         border-radius: 1vw; 
+    }
+    .exercise-selector {
+        width: 15vw;
     }
     
 
