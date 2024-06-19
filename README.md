@@ -1,23 +1,18 @@
-# rest-api-learning
+# Gym-Scheduler-Prototype
 
-npm init
+This is my own self-made prototype of application designed to manage my own workouts and monitor my progress at the gym. I wanted to create something useful, that at the same time allows me to develop
+my knowledge and skills in creating and using APIs.
 
-npm install -g typescript nodemon ts-node prettier
+** Register **
 
-tsc --init
+** Login **
 
-npm install express body-parser dotenv
+** Calendar **
 
-npm install --save-dev @types/express @types/body-parser @types/dotenv
+** Training management **
 
-npm run build
+# Programme preparation manual
 
-npm install mongoose
+Requirements: Node.js, npm, MongoDB,
 
-npm install --save-dev @types/mongoose
-
-npm install bcryptjs jsonwebtoken
-
-npm install --save-dev @types/bcryptjs @types/jsonwebtoken
-
-nodemon source/server.ts
+"npm install" "npm run build" "nodemon source/server.ts"
