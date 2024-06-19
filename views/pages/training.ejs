@@ -10,6 +10,11 @@
         </title>
     </head>
     <body>
+        <div id="main-menu">
+            <img src="../images/logout.png" onClick="signOut()" alt="Sign out">
+            <img src="../images/calendar.png" onClick="myDashboard()" alt="Dashboard">
+            <img src="../images/user.png" onClick="myAccount()" alt="My account">
+        </div>
         <div id="main-container">
             <div id="main-controller">
                 <button id="left-button" class="button" onClick="location.href='/dashboard'">Back</button>
@@ -19,17 +24,19 @@
                 </h1>
                 <button id="right-button" class="button" onClick="toggleCreateTrainingModal(true)">+</button>
             </div>
-            <div id="main-training">
+            <div id="main-training" class="scrollable-container">
                 <!-- Filled by training.js -->
             </div>
         </div>
-        <div id="create-training-modal">
+        <div id="create-training-modal" class="scrollable-container">
             <h1>Create training</h1>
             <!-- workoutType workoutPlan (type, weight_load, sets, repetitions, extraInformation) -->
             <form id="createTrainingForm">
                 <label for="workoutType">Workout type:</label><br>
                 <input type="text" id="workoutType" name="workoutType" required placeholder="Gym"><br>
                 <label for="workoutPlan">Workout plan:</label><br>
+                <button class="button" onClick="loadTemplate('A')" type="button">Template A</button>
+                <button class="button" onClick="loadTemplate('B')" type="button">Template B</button><br>
                 <button class="button" onClick="addExercise('workoutPlan')" type="button">+</button>
                 <button class="button" onClick="removeExercise('workoutPlan')" type="button">-</button>
                 <table id=workoutPlan>
@@ -47,7 +54,7 @@
                 <button class="button" onClick="toggleCreateTrainingModal(false)" type="button">Close</button>
             </form>
         </div>
-        <div id="edit-training-modal">
+        <div id="edit-training-modal" class="scrollable-container">
             <h1>Edit training</h1>
             <form id="editTrainingForm">
                 <label for="workoutTypeEdit">Workout type:</label><br>
@@ -70,6 +77,10 @@
                 <button class="button" onClick="toggleEditTrainingModal(false)" type="button">Close</button>
             </form>
         </div>
+        <div id="main-footer">
+            
+        </div>
         <script src="../js/training.js"></script>
+        <script src="../js/utils.js"></script>
     </body>
 </html>

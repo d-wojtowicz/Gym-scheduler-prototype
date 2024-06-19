@@ -2,12 +2,55 @@ import { Request, Response, NextFunction } from 'express';
 import mongoose from 'mongoose';
 import privateUserExercise from '../models/privateUserExercise';
 
-// PATCH
-const addCustomExercise = (req: Request, res: Response, next: NextFunction) => {
-    let { userId, customExercises } = req.body;
+// DELETE
+const removeCustomExercise = (req: Request, res: Response, next: NextFunction) => {
+    const user = req.user ?? null;
+    let id = '';
+    let customExerciseNames = req.body.customExerciseNames;
 
+    if (user) {
+        id = user.userId as string;
+    } else {
+        return res.status(500).json({
+            message: 'The token was not found.'
+        });
+    }
     privateUserExercise
-        .updateOne({ userId: userId }, { $push: { customExercises: { $each: customExercises } } }, { upsert: true })
+        .updateMany({ userId: id }, { $pull: { customExercises: { name: { $in: customExerciseNames } } } })
+        .then((result) => {
+            if (result.matchedCount === 0) {
+                return res.status(404).json({
+                    message: 'User not found.'
+                });
+            }
+            return res.status(200).json({
+                message: 'Custom exercises removed successfully.',
+                result: result
+            });
+        })
+        .catch((error) => {
+            return res.status(500).json({
+                message: error.message,
+                error
+            });
+        });
+};
+
+// PUT
+const addCustomExercise = (req: Request, res: Response, next: NextFunction) => {
+    const user = req.user ?? null;
+    let id = '';
+    let customExercises = req.body.customExercises;
+
+    if (user) {
+        id = user.userId as string;
+    } else {
+        return res.status(500).json({
+            message: 'The token was not found.'
+        });
+    }
+    privateUserExercise
+        .updateOne({ userId: id }, { $push: { customExercises: { $each: customExercises } } }, { upsert: true })
         .then((result) => {
             if (result.matchedCount === 0) {
                 return res.status(404).json({
@@ -66,7 +109,7 @@ const getAllPrivateExercises = (req: Request, res: Response, next: NextFunction)
     }
 
     privateUserExercise
-        .find(query)
+        .findOne(query)
         .exec()
         .then((results) => {
             return res.status(200).json({
@@ -83,6 +126,7 @@ const getAllPrivateExercises = (req: Request, res: Response, next: NextFunction)
 
 export default {
     addCustomExercise,
+    removeCustomExercise,
     createPrivateExercise,
     getAllPrivateExercises
 };

@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="css/style.css">
+        <title>Gym scheduler</title>
+    </head>
+    <body>
+        <div id="main-menu">
+            <img src="images/logout.png" onClick="signOut()" alt="Sign out">
+            <img src="images/calendar.png" onClick="myDashboard()" alt="Dashboard">
+            <img src="images/user.png" onClick="myAccount()" alt="My account">
+        </div>
+        <div id="main-user-info" class="scrollable-container">
+            <h1>My account</h1>
+            <div class="center">
+                <h3>General info</h3>
+                <table id="userInfo">
+                    <tr>
+                        <th>Age</th>
+                        <th>Weight [kg]</th>
+                        <th>Height [cm]</th>
+                    </tr>
+                    <tr>
+                        <td id="userAge"></td>
+                        <td id="userWeight"></td>
+                        <td id="userHeight"></td>
+                    </tr>
+                </table>
+                <h3>Private exercises</h3>
+                <table id="userPrivateExercise">
+                    <tr>
+                        <td><input type="text" placeholder="Input exercise name" id="privateExerciseName"></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <button class="button" onClick="addPrivateExercise()">Add</button>
+                            <button class="button" onClick="delPrivateExercise()">Delete</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td id="privateExercises">
+                            <!-- Filled with user.js -->
+                        </td>
+                    </tr>
+                </table>
+                <h3>Measurements</h3>
+                <table id="userMeasurements">
+                    <tr>
+                        <th>Date [dd-mm-yyyy]</th>
+                        <th>Weight [kg]</th>
+                        <th>Chest [cm]</th>
+                        <th>Waist [cm]</th>
+                        <th>Stomach [cm]</th>
+                        <th>Muffin-top [cm]</th>
+                        <th>Biceps (L) [cm]</th>
+                        <th>Biceps (P) [cm]</th>
+                        <th>Thigh [cm]</th>
+                        <th>Calf [cm]</th>
+                    </tr>
+                    <tr class="inputTable">
+                        <td><input type="date" name="measurement-date" id="measurement-date"></td>
+                        <td><input type="number" name="weight" id="weight" min="0" max="200"></td>
+                        <td><input type="number" name="chest" id="chest" min="0" max="150"></td>
+                        <td><input type="number" name="waist" id="waist" min="0" max="150"></td>
+                        <td><input type="number" name="stomach" id="stomach" min="0" max="150"></td>
+                        <td><input type="number" name="muffin-top" id="muffin-top" min="0" max="150"></td>
+                        <td><input type="number" name="biceps-L" id="biceps-L" min="0" max="60"></td>
+                        <td><input type="number" name="biceps-R" id="biceps-R" min="0" max="60"></td>
+                        <td><input type="number" name="thigh" id="thigh" min="0" max="100"></td>
+                        <td><input type="number" name="calf" id="calf" min="0" max="60"></td>
+                    </tr>
+                    <tr>
+                        <td colspan="100%"><button class="button" onClick="addMeasurement()" type="button">+</button></td>
+                    </tr>
+                    <!-- Filled with user.js -->
+                </table>
+            </div>
+        </div>
+        <div id="main-footer">
+            
+        </div>
+        <script src="js/user.js"></script>
+        <script src="js/utils.js"></script>
+    </body>
+</html>

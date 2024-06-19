@@ -1,6 +1,30 @@
 import { Request, Response, NextFunction } from 'express';
 import Template from '../models/template';
 
+// GET
+const getTemplate = (req: Request, res: Response, next: NextFunction) => {
+    const user = req.user ?? null;
+    const templateNum = req.params.templateNum;
+
+    if (user) {
+        const userId = user.userId as string;
+        const templateKey = `template${templateNum}`;
+
+        Template.findOne({ userId: userId }, templateKey)
+            .then((results) => {
+                return res.status(200).json({
+                    template: results
+                });
+            })
+            .catch((error) => {
+                return res.status(500).json({
+                    message: error.message,
+                    error
+                });
+            });
+    }
+};
+
 // UPDATE
 const updateTemplate = (req: Request, res: Response, next: NextFunction) => {
     const user = req.user ?? null;
@@ -37,5 +61,6 @@ const updateTemplate = (req: Request, res: Response, next: NextFunction) => {
 };
 
 export default {
+    getTemplate,
     updateTemplate
 };

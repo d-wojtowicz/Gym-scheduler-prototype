@@ -6,6 +6,35 @@ body{
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', 'Arial';
 }
 
+#main-menu {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 10vh;
+    background-color: var(--secondaryTheme);
+}
+
+#main-menu img {
+    cursor: pointer;
+    margin: 2vh 1vw 2vh 0vw;
+    height: 6vh;
+    float: right;
+}
+
+#main-menu img:hover {
+    background-color: var(--secondaryThemeHover);
+}
+
+#main-footer {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 7.5%;
+    background-color: var(--secondaryTheme);
+}
+
 :root {
     /* --mainTheme: rgb(0, 38, 48); */
     --mainTheme: rgb(40, 0, 0);
@@ -14,6 +43,8 @@ body{
     --secondaryThemeHover: rgb(90, 0, 0);
     --fontColor: white;
 }
+
+
 
 /* Login & Register page */
 #loginPage .container, #registerPage .container{
@@ -107,7 +138,7 @@ body{
     background-color: var(--mainTheme);
 
     position: absolute;
-    top: 10%;
+    top: 20%;
     left: 50%;
     transform: translate(-50%, -50%);
 }
@@ -143,7 +174,7 @@ body{
     background-color: var(--mainTheme);
 
     position: absolute;
-    top: 50%;
+    top: 60%;
     left: 50%;
     transform: translate(-50%, -50%);
 }
@@ -243,7 +274,7 @@ body{
     overflow-y: scroll;
     display: none;
     width: 50vw;
-    height: 70vh;
+    height: 60vh;
     padding: 3vw 3vh 3vw 3vh;
 
     color: var(--fontColor);
@@ -256,19 +287,19 @@ body{
     transform: translate(-50%, -50%);
 }
 
-#main-training::-webkit-scrollbar, #create-training-modal::-webkit-scrollbar, #edit-training-modal::-webkit-scrollbar{
+.scrollable-container::-webkit-scrollbar{
     background-color: var(--mainThemeHover);
 }
 
-#main-training::-webkit-scrollbar, #create-training-modal::-webkit-scrollbar-button, #edit-training-modal::-webkit-scrollbar-button{
+.scrollable-container::-webkit-scrollbar-button{
     background-color: var(--mainTheme);
 }
 
-#main-training::-webkit-scrollbar, #create-training-modal::-webkit-scrollbar-thumb, #edit-training-modal::-webkit-scrollbar-thumb{
+.scrollable-container::-webkit-scrollbar-thumb{
     background-color: var(--mainTheme);
 }
 
-#create-training-modal .button, #main-training .button, #edit-training-modal .button {
+#create-training-modal .button, #main-training .button, #edit-training-modal .button, #userPrivateExercise .button, #userMeasurements .button{
     width: 10vw;
     height: 5vh;
 
@@ -278,7 +309,7 @@ body{
     color: var(--fontColor);
 }
 
-#create-training-modal .button:hover, #main-training .button:hover, #edit-training-modal .button:hover {
+#create-training-modal .button:hover, #main-training .button:hover, #edit-training-modal .button:hover, #userPrivateExercise .button:hover, #userMeasurements .button:hover {
     cursor: pointer;
     background-color: var(--mainThemeHover);
 }
@@ -304,7 +335,7 @@ body{
     background-color: var(--mainTheme);
 }
 
-#createTrainingForm td, #createTrainingForm th, #createTrainingForm input, #editTrainingForm td, #editTrainingForm th, #editTrainingForm input{
+#createTrainingForm td, #createTrainingForm th, #createTrainingForm input, #editTrainingForm td, #editTrainingForm th, #editTrainingForm input, #userPrivateExercise td, #userPrivateExercise input, #userMeasurements td{
     text-align: center;
     color: var(--fontColor);
     padding: 1vh 0 1vh 0;
@@ -318,4 +349,156 @@ body{
     background-color: var(--mainTheme);
     font-weight: bold;
     color: white;
+}
+
+
+
+/* User page */
+#main-user-info{
+    overflow-y: scroll;
+    width: 60vw;
+    height: 60vh;
+    padding: 3vw 3vh 3vw 3vh;
+
+    color: var(--fontColor);
+    background-color: var(--secondaryTheme);
+    text-align: center;
+
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+#userInfo{
+    width: 20vw;
+    height: 10vh;
+    text-align: center;
+    border-collapse: collapse;
+    border: 1px solid white;
+    margin-bottom: 5vh;
+}
+
+#userInfo td, #userInfo th{
+    border: 1px solid white;
+}
+
+#userPrivateExercise {
+    margin-bottom: 5vh;
+}
+
+.center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.inputTable input{
+    width: 5vw;
+
+    font-weight: bold;
+    text-align: center;
+    color: var(--fontColor);
+    padding: 1vh 0 1vh 0;
+    border: 0px;
+    border-radius: 1vw; 
+    background-color: var(--mainTheme);
+}
+
+#measurement-date{
+    width: 8vw;
+}
+
+
+
+
+/* Responsiveness */
+@media (max-width: 800px) {
+    #loginPage .container, #registerPage .container{
+        width: 90vw;
+        top: 50%;
+    }
+    #loginForm input, #registerPage input{
+        width: 50vw;
+        height: 4vh;
+    }
+    #loginForm button, #registerForm button{
+        width: 30vw;
+        height: 5vh;
+        border-radius: 3vw;
+    }
+
+    #main-controller {
+        width: 100vw;
+        max-height: 20vh;
+    }
+    #main-controller .button{
+        width: 15vw;
+    }
+    #main-calendar, #main-training{
+        width: 100vw;
+        height: 60vh;
+    }
+    #main-calendar-month{
+        width: 96vw;
+        height: 54vh;
+        margin: 3vh 2vw 3vh 2vw;
+    }
+    #main-calendar-month th p{
+        font-size: 13px;
+        transform: rotate(45deg);
+    }
+
+    #create-training-modal .button, #main-training .button, #edit-training-modal .button, #userPrivateExercise .button, #userMeasurements .button{
+        width: 20vw;
+        height: 5vh;
+    }
+    .single-training table{
+        width: 96vw;
+        height: 54vh;
+        margin: 3vh 2vw 3vh 2vw;
+    }
+    .single-training table th, .single-training table td{
+        font-size: 18px;
+        border-radius: 1.5vw;
+    }
+
+    #create-training-modal, #edit-training-modal{
+        width: 70vw;
+        height: 60vh;
+        padding: 3vw 3vh 3vw 3vh;
+    }
+    #workoutPlan, #workoutPlanEdit{
+        width: 60vw;
+    }
+    #createTrainingForm textarea, #editTrainingForm textarea{
+        width: 60vw;
+    }
+    #createTrainingForm td, #createTrainingForm table th, #createTrainingForm input, #editTrainingForm td, #editTrainingForm th, #editTrainingForm input, #userPrivateExercise td, #userPrivateExercise input, #userMeasurements td{
+        padding: 1vh 0 1vh 0;
+        width: 15vw;
+        border-radius: 1vw; 
+    }
+    .exercise-selector {
+        width: 15vw;
+    }
+    
+
+    #main-user-info{
+        width: 90vw;
+        height: 65vh;
+    }
+    #userInfo{
+        width: 50vw;
+    }
+    #userPrivateExercise{
+        width: 60vw;
+    }
+    #userPrivateExercise input{
+        width: 50vw;
+    }
+    #userMeasurements{
+        width: 3vw;
+    }
 }

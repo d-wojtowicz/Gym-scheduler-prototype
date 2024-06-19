@@ -12,6 +12,7 @@ import trainingRoutes from './routes/training';
 import privateExerciseRoutes from './routes/privateUserExercise';
 import globalExerciseRoutes from './routes/globalUserExercise';
 import userRoutes from './routes/user';
+import measurementRoutes from './routes/measurement';
 import training from './controllers/training';
 import { verify } from 'jsonwebtoken';
 import verifyToken from '../public/js/verifyToken';
@@ -68,6 +69,7 @@ router.use('/api', globalExerciseRoutes);
 router.use('/api', templateRoutes);
 router.use('/api', trainingRoutes);
 router.use('/api', userRoutes);
+router.use('/api', measurementRoutes);
 
 /** Routes of our site */
 router.get('/', (req, res) => res.render('pages/login'));
@@ -75,6 +77,7 @@ router.get('/login', (req, res) => res.render('pages/login'));
 router.get('/register', (req, res) => res.render('pages/register'));
 router.get('/dashboard', (req, res) => res.render('pages/dashboard'));
 router.get('/dashboard/:date', (req, res) => res.render('pages/training', { trainingDate: req.params.date }));
+router.get('/user', (req, res) => res.render('pages/user'));
 
 /** Create the server */
 const httpServer = http.createServer(router);

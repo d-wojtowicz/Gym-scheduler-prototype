@@ -7,6 +7,11 @@
         <title>Gym scheduler</title>
     </head>
     <body>
+        <div id="main-menu">
+            <img src="images/logout.png" onClick="signOut()" alt="Sign out">
+            <img src="images/calendar.png" onClick="myDashboard()" alt="Dashboard">
+            <img src="images/user.png" onClick="myAccount()" alt="My account">
+        </div>
         <div id="main-controller">
             <h1>Gym calendar</h1>
             <button id="left-button" class="button" onClick="generateMonthPage('previous')"><</button>
@@ -20,6 +25,10 @@
                 <!-- Filled by dashboard.js -->
             </table>
         </div>
+        <div id="main-footer">
+            
+        </div>
         <script src="js/dashboard.js"></script>
+        <script src="js/utils.js"></script>
     </body>
 </html>
